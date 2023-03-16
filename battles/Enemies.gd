@@ -38,14 +38,22 @@ func onSelectingEnemies():
 		selected = firstSelectable
 		selected.get_children()[0].onSelected()
 
+func resetSelectionTween():
+	for node in enemySpots:
+		var maybeTweeningNode = node.get_children()[0]
+		if maybeTweeningNode.tween:
+			maybeTweeningNode.tween.kill()
+			maybeTweeningNode.modulate = Color(1, 1, 1, 1)
+
 func onSelectEnemy():
+	if selected:
+		resetSelectionTween()
+
 	if selectables[selectedX][selectedY]:
 		selected = selectables[selectedX][selectedY]
 	else:
 		selectedY = getFirstNonNullIdx(selectables[selectedX])
 		selected = selectables[selectedX][selectedY]
-	print('selected Coords: ', selectedX, ', ', selectedY)
-	print('selected Node: ', selected)
 
 	selected.get_children()[0].onSelected()
 

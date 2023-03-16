@@ -24,21 +24,12 @@ var membersStats = [memberOneStats, memberTwoStats, memberThreeStats, memberFout
 @onready var enemiesContainer = $Enemies
 @onready var partyMemberSpots = partyContainer.get_children()
 
-@onready var buttonAttack = $ActionsPanel/Actions/ButtonAttack
 @onready var enemyButtons = get_tree().get_nodes_in_group('enemyButtons')
 @onready var allButtons = Utils.findByClass(self, 'Button')
 @onready var lastButtonFocused = null
 @onready var lastButtonPressed = null
 @onready var tween = null
 var characterNodes = null
-
-
-func onAttackPressed():
-	Signals.emit_signal('selectingEnemies')
-
-	# these will be handled differently later
-	characterNodes[0].isAttacking = true
-	enemyButtons[0].grab_focus()
 
 func setNewCursorPosition(target):
 	cursor.position = target.get_screen_position()
@@ -48,18 +39,6 @@ func setNewCursorPosition(target):
 func onFocusChanged(control:Control) -> void:
 	if control == null:
 		return
-
-	if tween:
-		var enemyNode = lastButtonFocused.get_parent().get_parent()
-		tween.kill()
-		enemyNode.modulate = Color(1, 1, 1, 1)
-
-	if control.is_in_group('enemyButtons'):
-		var enemyNode = control.get_parent().get_parent()
-		tween = control.create_tween()
-		tween.set_loops()
-		tween.tween_property(enemyNode, 'modulate', Color(1.5, 1.5, 1.5, 1.5), 0.5)
-		tween.tween_property(enemyNode, 'modulate', Color(1, 1, 1, 1), 0.5)
 
 	setNewCursorPosition(control)
 	cursor.show()
@@ -83,18 +62,12 @@ func _ready():
 
 	characterNodes = get_tree().get_nodes_in_group('character')
 	# will be managed by a turn queue later
-	characterNodes[0].isActive = true
+	var activeCharacter = characterNodes[2]
+	activeCharacter.currentAction = Enums.ACTION.ACTIVE
+	Signals.emit_signal('characterActivated', activeCharacter)
 
 	remove_child(statblockPlaceholder)
 	add_child(statblock)
 	get_viewport().connect("gui_focus_changed", onFocusChanged)
-	buttonAttack.grab_focus()
-	buttonAttack.pressed.connect(onAttackPressed)
-
-#func _input(event):
-#	if Input.is_action_pressed("ui_cancel"):
-#		if lastButtonFocused.is_in_group('enemyButtons'):
-#			buttonAttack.grab_focus()
-#	if Input.is_action_pressed("ui_accept"):
-#		if lastButtonFocused.is_in_group('enemyButtons'):
-#		characterNodes[0].attack()
+#	buttonAttack.grab_focus()
+#	buttonAttack.pressed.connect(onAttackPressed)

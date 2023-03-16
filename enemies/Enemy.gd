@@ -16,14 +16,24 @@ var currMP: int = 0
 @onready var hpBar = get_node("Control/HP Bar")
 @onready var enemyButton = get_node("ReferenceRect/Button")
 
-func onAttackDamageRecieved(target, attackDamage):
+@onready var tween = null
+
+func onAttackDamageRecieved(target, damage):
+	print('should trigger')
+	print(target, damage)
 	if target == self:
-		currHP = currHP - attackDamage
+		currHP = currHP - damage
 		hpBar.value = currHP
 		hpLabel.text = str(currHP, '/', maxHP)
 
 func onSelected():
 	print('selected, ', self)
+#	tween.kill()
+	self.modulate = Color(1, 1, 1, 1)
+	tween = self.create_tween()
+	tween.set_loops()
+	tween.tween_property(self, 'modulate', Color(1.5, 1.5, 1.5, 1.5), 0.5)
+	tween.tween_property(self, 'modulate', Color(1, 1, 1, 1), 0.5)
 	Signals.emit_signal('enemyTargeted', self)
 
 func _ready():
@@ -38,5 +48,5 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+#func _process(delta):
+#	pass

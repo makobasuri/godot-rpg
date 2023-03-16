@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bealr61iey6h1"]
+[gd_scene load_steps=22 format=3 uid="uid://bealr61iey6h1"]
 
 [ext_resource type="Script" path="res://battles/battle.gd" id="1_016u5"]
 [ext_resource type="Texture2D" uid="uid://gok5uonvpv6l" path="res://assets/grasslands.png" id="1_eg6kn"]
@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://dxuwq7yidja37" path="res://theme/new_theme.tres" id="7_ropw0"]
 [ext_resource type="PackedScene" uid="uid://ccada2ygkthj6" path="res://enemies/ghost.tscn" id="7_sf03x"]
 [ext_resource type="SystemFont" uid="uid://caxx4clind5uv" path="res://theme/font.tres" id="8_7dxl4"]
+[ext_resource type="Script" path="res://battles/ActionsPanel.gd" id="10_nnv1l"]
 [ext_resource type="PackedScene" uid="uid://b3y3514lolfbp" path="res://battles/GUI/statblock.tscn" id="10_rmou2"]
 [ext_resource type="Texture2D" uid="uid://dmehiuqf6dt36" path="res://theme/cursor2.png" id="12_4lper"]
 
@@ -146,6 +147,7 @@ offset_top = 485.0
 offset_right = 1264.0
 offset_bottom = 637.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_8rp8y")
+script = ExtResource("10_nnv1l")
 
 [node name="Actions" type="GridContainer" parent="ActionsPanel"]
 layout_direction = 2
@@ -160,7 +162,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ButtonAttack" type="Button" parent="ActionsPanel/Actions"]
+[node name="ATTACKING" type="Button" parent="ActionsPanel/Actions"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("7_ropw0")
@@ -178,7 +180,7 @@ text = "Attack"
 icon = SubResource("ViewportTexture_lq0cy")
 flat = true
 
-[node name="Cast Spell" type="Button" parent="ActionsPanel/Actions"]
+[node name="CASTING" type="Button" parent="ActionsPanel/Actions"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("7_ropw0")
@@ -196,7 +198,7 @@ text = "Cast Spell"
 icon = SubResource("ViewportTexture_lq0cy")
 flat = true
 
-[node name="ButtonDefend" type="Button" parent="ActionsPanel/Actions"]
+[node name="DEFENDING" type="Button" parent="ActionsPanel/Actions"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("7_ropw0")
@@ -212,7 +214,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_2xd63")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_uakhb")
 text = "Defend"
 
-[node name="Use Item" type="Button" parent="ActionsPanel/Actions"]
+[node name="USING" type="Button" parent="ActionsPanel/Actions"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("7_ropw0")

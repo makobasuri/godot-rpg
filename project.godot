@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 Utils="*res://Global/Utils.gd"
 PartyStats="*res://chars/PartyStats.gd"
 Signals="*res://Global/Signals.gd"
+Enums="*res://Global/Enums.gd"
 
 [display]
 

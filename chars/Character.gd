@@ -11,15 +11,28 @@ var attackDamage = 0
 var armor = 0
 var speed = 0
 var enemyTargeted
-var isActive = false
-var isAttacking = false
 
-func onAttackDamageRecieved():
-	print('hello')
+var choosableActions = [
+	Enums.ACTION.ATTACKING,
+	Enums.ACTION.CASTING,
+	Enums.ACTION.DEFENDING,
+	Enums.ACTION.USING
+]
+var currentAction = Enums.ACTION.WAITING
+
+#func onAttackDamageRecieved():
+#	print('hello')
 
 func onEnemyTargeted(enemy):
 	enemyTargeted = enemy
-	print(enemyTargeted)
+
+func onChoseAction(action, character):
+	if self != character:
+		return
+	if action == Enums.ACTION.ATTACKING:
+		Signals.emit_signal('selectingEnemies')
+	currentAction = action
+
 
 func init(stats):
 	charName = stats.charName
@@ -39,20 +52,20 @@ func init(stats):
 	add_to_group('character')
 
 	Signals.connect('enemyTargeted', onEnemyTargeted)
-	Signals.connect('attackDamageRecieve', onAttackDamageRecieved)
+#	Signals.connect('choosingActions', onChoosingActions)
+	Signals.connect('choseAction', onChoseAction)
+#	Signals.connect('attackDamageRecieve', onAttackDamageRecieved)
 
 	return self
 
 func attack():
 	Signals.emit_signal('attackDamageRecieve', enemyTargeted, attackDamage)
-
-func test():
-	print('jo', maxHP)
+	currentAction = Enums.ACTION.WAITING
 
 func _input(event):
-	if !isActive:
+	if currentAction == Enums.ACTION.WAITING:
 		return
-	if isAttacking:
+	if currentAction == Enums.ACTION.ATTACKING:
 		if event.is_action_pressed("ui_accept"):
 			attack()
 
