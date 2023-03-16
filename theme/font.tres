@@ -1,0 +1,9 @@
+[gd_resource type="SystemFont" format=3 uid="uid://caxx4clind5uv"]
+
+[resource]
+font_weight = 600
+generate_mipmaps = true
+hinting = 0
+subpixel_positioning = 0
+msdf_pixel_range = 32
+oversampling = 1.0

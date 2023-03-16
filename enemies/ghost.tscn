@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccada2ygkthj6"]
+
+[ext_resource type="Texture2D" uid="uid://dwpwsn0dwvgqd" path="res://assets/PIPOYA FREE RPG Character Sprites 32x32/Enemy/Enemy 09-1.png" id="1_31ydg"]
+[ext_resource type="Script" path="res://enemies/Enemy.gd" id="1_i6h4p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1cw5"]
+atlas = ExtResource("1_31ydg")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pvij3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1cw5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcjw7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oebvl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cs6u5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ulx5v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lup7t"]
+
+[node name="ghost" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_i6h4p")
+maxHP = 6
+
+[node name="frontTop" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2.87427, -42.3837)
+scale = Vector2(3.59282, 3.92442)
+sprite_frames = SubResource("SpriteFrames_pvij3")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+offset_left = -34.0001
+offset_top = -84.0
+offset_right = 29.9999
+offset_bottom = 16.0
+
+[node name="Button" type="Button" parent="ReferenceRect" groups=["enemyButtons"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath("../../../../backTopEnemy/ReferenceRect/Button")
+focus_neighbor_top = NodePath("../../../../frontBottomEnemy/ReferenceRect/Button")
+focus_neighbor_right = NodePath("../../../../backTopEnemy/ReferenceRect/Button")
+focus_neighbor_bottom = NodePath("../../../../frontCenterEnemy/ReferenceRect/Button")
+focus_next = NodePath("../../../../frontCenterEnemy/ReferenceRect/Button")
+focus_previous = NodePath("../../../../frontBottomEnemy/ReferenceRect/Button")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tcjw7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_oebvl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cs6u5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ulx5v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lup7t")
+
+[node name="Control" type="VBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = -163.0
+offset_right = 53.0
+offset_bottom = -123.0
+grow_horizontal = 2
+size_flags_vertical = 8
+
+[node name="HP Label" type="Label" parent="Control"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "5 / 5"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HP Bar" type="ProgressBar" parent="Control"]
+layout_mode = 2
+max_value = 5.0
+value = 5.0
+show_percentage = false

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b11wa4fboin8q"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h2s2o"]
+load_path = "res://.godot/imported/TX Plant.png-c81455d7c30eb7f4675fd84a2474f821.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5275b"]
+atlas = SubResource("CompressedTexture2D_h2s2o")
+region = Rect2(23, 13, 115, 141)
+
+[node name="tree1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -65)
+texture = SubResource("AtlasTexture_5275b")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -65)
+polygon = PackedVector2Array(-4, 59, 4, 59, 5, 60, 5, 66, 3, 68, 2, 69, -2, 69, -5, 66, -5, 62)

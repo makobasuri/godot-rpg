@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdqsf6bicqgr6"]
+
+[ext_resource type="Script" path="res://chars/Character.gd" id="1_2krhg"]
+[ext_resource type="Texture2D" uid="uid://camuo0k3r3a3d" path="res://assets/PIPOYA FREE RPG Character Sprites 32x32/Female/Female 03-1.png" id="2_7rtr2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lxru"]
+atlas = ExtResource("2_7rtr2")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pyc4i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lxru")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Character" type="Node2D" groups=["character"]]
+script = ExtResource("1_2krhg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -26)
+scale = Vector2(2.4375, 2.4375)
+sprite_frames = SubResource("SpriteFrames_pyc4i")

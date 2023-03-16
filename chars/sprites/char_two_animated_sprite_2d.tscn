@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://da7ul3udbwotp"]
+
+[ext_resource type="Texture2D" uid="uid://de4y0uhm7awws" path="res://assets/PIPOYA FREE RPG Character Sprites 32x32/Male/Male 02-1.png" id="1_eua0p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2juxd"]
+atlas = ExtResource("1_eua0p")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f1p7v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2juxd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D"]
+position = Vector2(0, -23)
+scale = Vector2(2.25, 2.25)
+sprite_frames = SubResource("SpriteFrames_f1p7v")

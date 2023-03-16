@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dxuwq7yidja37"]
+
+[ext_resource type="SystemFont" uid="uid://caxx4clind5uv" path="res://theme/font.tres" id="1_d6u17"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mym4"]
+
+[resource]
+default_font_size = 20
+/colors/black = Color(1, 1, 1, 1)
+/font_sizes/textsize = 20
+/fonts/text = ExtResource("1_d6u17")
+/styles/styleBoxEmpty = SubResource("StyleBoxEmpty_7mym4")
