@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccada2ygkthj6"]
+[gd_scene load_steps=11 format=3 uid="uid://ccada2ygkthj6"]
 
 [ext_resource type="Texture2D" uid="uid://dwpwsn0dwvgqd" path="res://assets/PIPOYA FREE RPG Character Sprites 32x32/Enemy/Enemy 09-1.png" id="1_31ydg"]
 [ext_resource type="Script" path="res://enemies/Enemy.gd" id="1_i6h4p"]
+[ext_resource type="Resource" uid="uid://u6wvroui1ne1" path="res://skills/Attack.tres" id="2_a0e7w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c1cw5"]
 atlas = ExtResource("1_31ydg")
@@ -31,6 +32,7 @@ animations = [{
 [node name="ghost" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_i6h4p")
 maxHP = 6
+skills = Array[Resource("res://skills/Skill.gd")]([ExtResource("2_a0e7w")])
 
 [node name="frontTop" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.87427, -42.3837)

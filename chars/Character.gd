@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Character
 
+var cursor
+
 var charName = ''
 var maxHP = 0
 var currHP = 0
@@ -20,8 +22,19 @@ var choosableActions = [
 ]
 var currentAction = Enums.ACTION.WAITING
 
-#func onAttackDamageRecieved():
-#	print('hello')
+func onAttackDamageRecieved(target, damage):
+	if target != self:
+		return
+	var damageDealt = damage - armor if damage - armor > 0 else 1
+	currHP = currHP - damageDealt
+	Signals.emit_signal('statsChanged', charName, 'HP', currHP, maxHP)
+
+func onBattlerActivated(battler):
+	if self != battler:
+		return
+	currentAction = Enums.ACTION.ACTIVE
+	cursor.show()
+	Signals.emit_signal('characterActivated', self)
 
 func onEnemyTargeted(enemy):
 	enemyTargeted = enemy
@@ -32,6 +45,7 @@ func onChoseAction(action, character):
 	if action == Enums.ACTION.ATTACKING:
 		Signals.emit_signal('selectingEnemies')
 	currentAction = action
+	cursor.hide()
 
 
 func init(stats):
@@ -51,16 +65,21 @@ func init(stats):
 	add_child(spriteScene)
 	add_to_group('character')
 
+	cursor = get_node("CursorContainer")
+	cursor.hide()
+
+	Signals.connect('battlerActivated', onBattlerActivated)
 	Signals.connect('enemyTargeted', onEnemyTargeted)
-#	Signals.connect('choosingActions', onChoosingActions)
 	Signals.connect('choseAction', onChoseAction)
-#	Signals.connect('attackDamageRecieve', onAttackDamageRecieved)
+	Signals.connect('attackDamageRecieve', onAttackDamageRecieved)
 
 	return self
 
 func attack():
+	print('attacker: ', charName)
 	Signals.emit_signal('attackDamageRecieve', enemyTargeted, attackDamage)
 	currentAction = Enums.ACTION.WAITING
+	Signals.emit_signal('battlerFinishedTurn')
 
 func _input(event):
 	if currentAction == Enums.ACTION.WAITING:

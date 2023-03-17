@@ -98,5 +98,3 @@ func _input(event):
 		isSelectingEnemy = false
 	if event.is_action_pressed('ui_cancel'):
 		isSelectingEnemy = false
-
-

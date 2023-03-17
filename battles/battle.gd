@@ -11,38 +11,34 @@ var memberThreeStats = PartyStats.partyMemberThree
 var memberFoutStats = PartyStats.partyMemberFour
 var membersStats = [memberOneStats, memberTwoStats, memberThreeStats, memberFoutStats]
 
-@onready var statblockPlaceholder = $Statblock
-@onready var statblock = preload(
-	'res://battles/GUI/statblock.tscn'
-).instantiate().setStatsBlock(membersStats)
 @onready var Character = preload('res://chars/Character.tscn')
 
-
-@onready var cursor = $cursor
 @onready var partyContainer = $Party
-
 @onready var enemiesContainer = $Enemies
 @onready var partyMemberSpots = partyContainer.get_children()
 
-@onready var enemyButtons = get_tree().get_nodes_in_group('enemyButtons')
-@onready var allButtons = Utils.findByClass(self, 'Button')
-@onready var lastButtonFocused = null
-@onready var lastButtonPressed = null
-@onready var tween = null
 var characterNodes = null
+var enemyNodes = null
 
-func setNewCursorPosition(target):
-	cursor.position = target.get_screen_position()
-	cursor.position.x -= cursor.size.x
-	cursor.position.y +=  target.size.y / 2 - cursor.size.y / 2
+var turnQueue = []
 
-func onFocusChanged(control:Control) -> void:
-	if control == null:
-		return
+func activateBattler():
+	var activeBattler = turnQueue[0]
+	Signals.emit_signal('battlerActivated', activeBattler)
 
-	setNewCursorPosition(control)
-	cursor.show()
-	lastButtonFocused = control
+func initTurnQueue():
+	characterNodes = get_tree().get_nodes_in_group('character')
+	enemyNodes = get_tree().get_nodes_in_group('enemy')
+	turnQueue = turnQueue + characterNodes + enemyNodes
+
+	Signals.emit_signal('charactersSpawned', characterNodes)
+	turnQueue.sort_custom(func(a, b): return a.speed > b.speed)
+	activateBattler()
+
+func onBattlerFinishedTurn():
+	var finishedBattler = turnQueue.pop_front()
+	turnQueue.push_back(finishedBattler)
+	activateBattler()
 
 func _ready():
 	var placeHolderChars = get_tree().get_nodes_in_group('character')
@@ -60,14 +56,5 @@ func _ready():
 		parent.remove_child(placeHolderChar)
 		parent.add_child(charInstance)
 
-	characterNodes = get_tree().get_nodes_in_group('character')
-	# will be managed by a turn queue later
-	var activeCharacter = characterNodes[2]
-	activeCharacter.currentAction = Enums.ACTION.ACTIVE
-	Signals.emit_signal('characterActivated', activeCharacter)
-
-	remove_child(statblockPlaceholder)
-	add_child(statblock)
-	get_viewport().connect("gui_focus_changed", onFocusChanged)
-#	buttonAttack.grab_focus()
-#	buttonAttack.pressed.connect(onAttackPressed)
+	initTurnQueue()
+	Signals.connect('battlerFinishedTurn', onBattlerFinishedTurn)

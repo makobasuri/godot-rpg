@@ -1,13 +1,19 @@
 extends Panel
 
 @onready var actionButtons = $Actions.get_children()
+@onready var actionsCursor = $ActionsCursor
 
 var choosingCharacter = null
 var characterIsChoosingAction = false
 
-func onCharacterActivated(character):
-	choosingCharacter = character
+func onFocusChanged(control:Control):
+	if control == null:
+		actionsCursor.hide()
+	if len(actionButtons.filter(func(button): return button == control)) > 0:
+		actionsCursor.global_position.y = control.global_position.y + 16
 
+
+func onCharacterActivated(character):
 	for idx in len(character.choosableActions):
 		var possibleAction = character.choosableActions[idx]
 		if possibleAction == Enums.ACTION.ATTACKING:
@@ -23,30 +29,32 @@ func onCharacterActivated(character):
 	actionButtons.filter(
 		func(item): return item.is_visible()
 	)[0].grab_focus()
-
 	characterIsChoosingAction = true
+	choosingCharacter = character
 
 func onCharacterWaiting(character):
 	if choosingCharacter == character:
 		choosingCharacter = null
 
 func onActionButtonPressed(button):
+	if choosingCharacter == null:
+		return
+	button.release_focus()
+	actionsCursor.hide()
 	var actionName = button.name
 	var action = Enums.ACTION[actionName]
-	button.release_focus()
 	Signals.emit_signal('choseAction', action, choosingCharacter)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# perhaps solve with signal
 	for idx in len(actionButtons):
 		var actionButton = actionButtons[idx]
 
 		actionButton.pressed.connect(func(): return onActionButtonPressed(actionButton))
 		actionButton.hide()
 	self.hide()
+	get_viewport().connect("gui_focus_changed", onFocusChanged)
 	Signals.connect('characterActivated', onCharacterActivated)
 	Signals.connect('characterWaiting', onCharacterWaiting)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

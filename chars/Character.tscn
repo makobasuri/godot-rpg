@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdqsf6bicqgr6"]
+[gd_scene load_steps=6 format=3 uid="uid://bdqsf6bicqgr6"]
 
 [ext_resource type="Script" path="res://chars/Character.gd" id="1_2krhg"]
 [ext_resource type="Texture2D" uid="uid://camuo0k3r3a3d" path="res://assets/PIPOYA FREE RPG Character Sprites 32x32/Female/Female 03-1.png" id="2_7rtr2"]
+[ext_resource type="Texture2D" uid="uid://cuufv8eyef7r8" path="res://theme/cursor6-16-white-outline.png" id="3_uxwiu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3lxru"]
 atlas = ExtResource("2_7rtr2")
@@ -25,3 +26,10 @@ script = ExtResource("1_2krhg")
 position = Vector2(0, -26)
 scale = Vector2(2.4375, 2.4375)
 sprite_frames = SubResource("SpriteFrames_pyc4i")
+
+[node name="CursorContainer" type="Node2D" parent="."]
+position = Vector2(0, -80)
+
+[node name="Sprite2D" type="Sprite2D" parent="CursorContainer"]
+rotation = 1.5708
+texture = ExtResource("3_uxwiu")

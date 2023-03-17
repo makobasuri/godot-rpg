@@ -1,10 +1,18 @@
 extends Node
 
-signal attackDamageDealt
-signal attackDamageRecieve
-signal enemyTargeted
-signal selectingEnemies
-signal choosingActions
-signal choseAction
+signal enemiesSpawned
+signal charactersSpawned
+
+signal battlerActivated
 signal characterActivated
 signal characterWaiting
+signal choosingActions
+signal choseAction
+signal enemyTargeted
+signal selectingEnemies
+
+signal attackDamageDealt
+signal attackDamageRecieve
+signal statsChanged
+
+signal battlerFinishedTurn
