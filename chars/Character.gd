@@ -85,7 +85,7 @@ func _input(event):
 	if currentAction == Enums.ACTION.WAITING:
 		return
 	if currentAction == Enums.ACTION.ATTACKING:
-		if event.is_action_pressed("ui_accept"):
+		if event.is_action_released("ui_accept"):
 			attack()
 
 # Called when the node enters the scene tree for the first time.

@@ -11,6 +11,8 @@ var selectedX
 var selectedY
 var isSelectingEnemy
 
+# TODO: somethings not right
+
 func getFirstNonNullIdx(arr):
 	for idx in len(arr):
 		if arr[idx]:
@@ -82,19 +84,19 @@ func _input(event):
 
 	var lenX = len(selectables)
 	var lenY = len(selectables[selectedX])
-	if event.is_action_pressed('ui_up'):
+	if event.is_action_released('ui_up'):
 		selectedY = (selectedY - 1 + lenY) % lenY
 		onSelectEnemy()
-	if event.is_action_pressed('ui_right'):
+	if event.is_action_released('ui_right'):
 		selectedX = (selectedX + 1) % lenX
 		onSelectEnemy()
-	if event.is_action_pressed('ui_down'):
+	if event.is_action_released('ui_down'):
 		selectedY = (selectedY + 1) % lenY
 		onSelectEnemy()
-	if event.is_action_pressed('ui_left'):
+	if event.is_action_released('ui_left'):
 		selectedX = (selectedX - 1) + lenX % lenX
 		onSelectEnemy()
-	if event.is_action_pressed('ui_accept'):
+	if event.is_action_released('ui_accept'):
 		isSelectingEnemy = false
-	if event.is_action_pressed('ui_cancel'):
+	if event.is_action_released('ui_cancel'):
 		isSelectingEnemy = false
