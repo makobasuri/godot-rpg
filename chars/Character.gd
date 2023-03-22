@@ -22,6 +22,9 @@ var choosableActions = [
 ]
 var currentAction = Enums.ACTION.WAITING
 
+var tween
+var globalPosition
+
 func onAttackDamageRecieved(target, damage):
 	if target != self:
 		return
@@ -37,6 +40,8 @@ func onBattlerActivated(battler):
 	Signals.emit_signal('characterActivated', self)
 
 func onEnemyTargeted(enemy):
+	if !enemy:
+		return
 	enemyTargeted = enemy
 
 func onChoseAction(action, character):
@@ -76,10 +81,19 @@ func init(stats):
 	return self
 
 func attack():
-	print('attacker: ', charName)
-	Signals.emit_signal('attackDamageRecieve', enemyTargeted, attackDamage)
+	var startingPosition = self.global_position
+	var finalPosition = Vector2(enemyTargeted.global_position.x - 64, enemyTargeted.global_position.y)
+	tween = self.create_tween()
 	currentAction = Enums.ACTION.WAITING
+	tween.tween_property(self, 'global_position', finalPosition, 0.25)
+	await tween.finished
+	await get_tree().create_timer(0.5).timeout
+	Signals.emit_signal('attackDamageRecieve', enemyTargeted, attackDamage)
+	tween = self.create_tween()
+	tween.tween_property(self, 'global_position', startingPosition, 0.15)
+	await tween.finished
 	Signals.emit_signal('battlerFinishedTurn')
+	Signals.emit_signal('choseEnemy')
 
 func _input(event):
 	if currentAction == Enums.ACTION.WAITING:

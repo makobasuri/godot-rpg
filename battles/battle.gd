@@ -40,6 +40,12 @@ func onBattlerFinishedTurn():
 	turnQueue.push_back(finishedBattler)
 	activateBattler()
 
+func onBattlerDied(battler):
+	turnQueue = turnQueue.filter(func(item): return item != battler)
+
+func onVictory():
+	print('YOU WON')
+
 func _ready():
 	var placeHolderChars = get_tree().get_nodes_in_group('character')
 
@@ -57,4 +63,6 @@ func _ready():
 		parent.add_child(charInstance)
 
 	initTurnQueue()
+	Signals.connect('victory', onVictory)
+	Signals.connect('died', onBattlerDied)
 	Signals.connect('battlerFinishedTurn', onBattlerFinishedTurn)

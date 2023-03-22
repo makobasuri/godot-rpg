@@ -10,9 +10,13 @@ signal choosingActions
 signal choseAction
 signal enemyTargeted
 signal selectingEnemies
+signal choseEnemy
 
 signal attackDamageDealt
 signal attackDamageRecieve
 signal statsChanged
 
 signal battlerFinishedTurn
+
+signal died
+signal victory

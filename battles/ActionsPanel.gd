@@ -26,9 +26,11 @@ func onCharacterActivated(character):
 			actionButtons[3].show()
 	self.show()
 
-	actionButtons.filter(
+	var focusableButton = actionButtons.filter(
 		func(item): return item.is_visible()
-	)[0].grab_focus()
+	)[0]
+	actionsCursor.show()
+	focusableButton.grab_focus()
 	characterIsChoosingAction = true
 	choosingCharacter = character
 

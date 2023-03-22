@@ -6,59 +6,75 @@ extends Node2D
 @onready var enemy = preload("res://enemies/ghost.tscn")
 
 var selectables = [[], []]
-var selected
+var selected = null
+var lastSelected = null
 var selectedX
 var selectedY
-var isSelectingEnemy
+var isSelectingEnemy: bool
+var fightIsOver: bool = false
 
-# TODO: somethings not right
-
-func getFirstNonNullIdx(arr):
+func getFirstNonDeadIdx(arr):
 	for idx in len(arr):
-		if arr[idx]:
+		if !getEnemy(arr[idx]).isDead:
 			return idx
+
+func getEnemy(spot):
+	return spot.get_children()[0]
 
 func getFirstSelectable():
 	for outerIdx in len(selectables):
 		for innerIdx in len(selectables[outerIdx]):
 			var selectable = selectables[outerIdx][innerIdx]
-			if selectable:
+			if !getEnemy(selectable).isDead:
 				selectedX = outerIdx
 				selectedY = innerIdx
 				return selectable
-			else:
-				return null
+				break
 
 func onSelectingEnemies():
-	if selected:
-		# remember to clear selected if it died
+	if fightIsOver:
 		return
-
-	var firstSelectable = getFirstSelectable()
-	if firstSelectable:
-		isSelectingEnemy = true
-		selected = firstSelectable
-		selected.get_children()[0].onSelected()
+	isSelectingEnemy = true
+	if lastSelected:
+		if !getEnemy(lastSelected).isDead:
+			getEnemy(lastSelected).onSelected()
+			return
+	selected = getFirstSelectable()
+	getEnemy(selected).onSelected()
 
 func resetSelectionTween():
 	for node in enemySpots:
 		var maybeTweeningNode = node.get_children()[0]
-		if maybeTweeningNode.tween:
-			maybeTweeningNode.tween.kill()
-			maybeTweeningNode.modulate = Color(1, 1, 1, 1)
+		if maybeTweeningNode && maybeTweeningNode.isDead:
+			maybeTweeningNode.selectedTween.kill()
+			print('killed tween, ', node)
+			continue
+		if maybeTweeningNode && maybeTweeningNode.selectedTween:
+			maybeTweeningNode.selectedTween.kill()
+			maybeTweeningNode.modulate = Color(1, 1, 1)
 
 func onSelectEnemy():
-	if selected:
-		resetSelectionTween()
-
-	if selectables[selectedX][selectedY]:
+	if !getEnemy(selectables[selectedX][selectedY]).isDead:
 		selected = selectables[selectedX][selectedY]
 	else:
-		selectedY = getFirstNonNullIdx(selectables[selectedX])
-		selected = selectables[selectedX][selectedY]
+		selected = getFirstSelectable()
 
-	selected.get_children()[0].onSelected()
+	resetSelectionTween()
+	getEnemy(selected).onSelected()
 
+
+func onChoseEnemy():
+	isSelectingEnemy = false
+	if selected:
+		lastSelected = selected
+		selected = null
+	resetSelectionTween()
+
+func onDied(_node):
+	if !getFirstSelectable():
+		isSelectingEnemy = false
+		fightIsOver = true
+		Signals.emit_signal('victory')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -76,6 +92,8 @@ func _ready():
 		enemySpot.add_child(enemy.instantiate())
 
 	Signals.connect('selectingEnemies', onSelectingEnemies)
+	Signals.connect('choseEnemy', onChoseEnemy)
+	Signals.connect('died', onDied)
 
 
 func _input(event):
@@ -96,7 +114,5 @@ func _input(event):
 	if event.is_action_released('ui_left'):
 		selectedX = (selectedX - 1) + lenX % lenX
 		onSelectEnemy()
-	if event.is_action_released('ui_accept'):
-		isSelectingEnemy = false
 	if event.is_action_released('ui_cancel'):
 		isSelectingEnemy = false
