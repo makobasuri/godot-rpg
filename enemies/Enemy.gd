@@ -12,6 +12,10 @@ var currMP: int = 0
 @export var armor: int = 0
 @export var speed: int = 1
 @export var skills: Array[Skill] = []
+@export var CR: float = 0.0
+@export var loot: Array[Item] = []
+@export var currencyMin: int = 0
+@export var currencyMax: int = 0
 
 @onready var hpLabel = get_node("Control/HP Label")
 @onready var hpBar = get_node("Control/HP Bar")
@@ -22,31 +26,46 @@ var currMP: int = 0
 var characterNodes = null
 var spriteNode = null
 var isDead:bool = false
+var damageTween
 var deathTween
 var selectedTween
 
 func onCharactersSpawned(nodes):
 	characterNodes = nodes
 
-func onAttackDamageRecieved(target, damage):
-	if target != self:
-		return
+func onDamageRecieved(damage):
 	currHP = currHP - damage
 	hpBar.value = currHP
 	hpLabel.text = str(currHP, '/', maxHP)
+	if selectedTween:
+		selectedTween.kill()
+	if tween:
+		tween.kill()
+	if damageTween:
+		damageTween.kill()
 	if currHP <= 0:
-		if selectedTween:
-			selectedTween.kill()
-		if tween:
-			tween.kill()
 		isDead = true
 		Signals.emit_signal('died', self)
 		deathTween = create_tween()
 		deathTween.tween_property(self, 'position', Vector2(5, 5), 0.1).set_trans(Tween.TRANS_ELASTIC)
 		deathTween.tween_property(self, 'position', Vector2(-5, -5), 0.1).set_trans(Tween.TRANS_ELASTIC)
-		deathTween.tween_property(self, 'modulate', Color(1.5, 0.5, 0.5, 0), 0.25)
+		deathTween.parallel().tween_property(self, 'modulate', Color(1.5, 0.5, 0.5, 0), 0.25)
 		await deathTween.finished
 		self.modulate = Color(1, 1, 1, 0)
+	else:
+		damageTween = create_tween()
+		damageTween.tween_property(self, 'position', Vector2(3, 0), 0.05).set_trans(Tween.TRANS_ELASTIC)
+		damageTween.parallel().tween_property(self, 'modulate', Color(1.5, 1.5, 1.5), 0.1)
+		damageTween.tween_property(self, 'modulate', Color(0.8, 0.8, 0.8), 0.1)
+		damageTween.tween_property(self, 'position', Vector2(-3, 0), 0.05).set_trans(Tween.TRANS_ELASTIC)
+		damageTween.parallel().tween_property(self, 'modulate', Color(1.5, 1.5, 1.5), 0.1)
+		damageTween.tween_property(self, 'modulate', Color(1, 1, 1), 0.1)
+
+func onAttackDamageRecieved(target, damage):
+	if target != self:
+		return
+	var trueDamageRecieved = damage - armor
+	onDamageRecieved(trueDamageRecieved)
 
 
 func onSelected():

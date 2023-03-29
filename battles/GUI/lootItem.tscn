@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://d07e6f1o6yrrx"]
+
+[ext_resource type="PackedScene" uid="uid://gboxs70gf827" path="res://items/ItemSprite.tscn" id="1_xn4pr"]
+
+[node name="lootItem" type="HBoxContainer"]
+size_flags_vertical = 4
+alignment = 1
+
+[node name="ItemSprite" parent="." instance=ExtResource("1_xn4pr")]
+layout_mode = 2
+
+[node name="itemLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 10
+text = "Item"
+vertical_alignment = 1

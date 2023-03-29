@@ -19,17 +19,18 @@ func getFirstNonDeadIdx(arr):
 			return idx
 
 func getEnemy(spot):
-	return spot.get_children()[0]
+	var spotChildren = spot.get_children()
+	if len(spotChildren) > 0:
+		return spot.get_children()[0]
 
 func getFirstSelectable():
 	for outerIdx in len(selectables):
 		for innerIdx in len(selectables[outerIdx]):
 			var selectable = selectables[outerIdx][innerIdx]
-			if !getEnemy(selectable).isDead:
+			if  getEnemy(selectable) && !getEnemy(selectable).isDead:
 				selectedX = outerIdx
 				selectedY = innerIdx
 				return selectable
-				break
 
 func onSelectingEnemies():
 	if fightIsOver:
@@ -44,18 +45,27 @@ func onSelectingEnemies():
 
 func resetSelectionTween():
 	for node in enemySpots:
-		var maybeTweeningNode = node.get_children()[0]
-		if maybeTweeningNode && maybeTweeningNode.isDead:
-			maybeTweeningNode.selectedTween.kill()
-			print('killed tween, ', node)
-			continue
-		if maybeTweeningNode && maybeTweeningNode.selectedTween:
-			maybeTweeningNode.selectedTween.kill()
-			maybeTweeningNode.modulate = Color(1, 1, 1)
+		var enemySpotChildren = node.get_children()
+		if len(enemySpotChildren) > 0:
+			var maybeTweeningNode = node.get_children()[0]
+			if maybeTweeningNode && maybeTweeningNode.isDead:
+				maybeTweeningNode.selectedTween.kill()
+				continue
+			if maybeTweeningNode && maybeTweeningNode.selectedTween:
+				maybeTweeningNode.selectedTween.kill()
+				maybeTweeningNode.modulate = Color(1, 1, 1)
 
 func onSelectEnemy():
+	var aliveEnemyIdx = -1
+	if selectables[selectedX]:
+		for selXIdx in len(selectables[selectedX]):
+			if !getEnemy(selectables[selectedX][selXIdx]).isDead:
+				aliveEnemyIdx = selXIdx
+				break
 	if !getEnemy(selectables[selectedX][selectedY]).isDead:
 		selected = selectables[selectedX][selectedY]
+	elif aliveEnemyIdx != -1:
+		selected = selectables[selectedX][aliveEnemyIdx]
 	else:
 		selected = getFirstSelectable()
 
@@ -86,10 +96,10 @@ func _ready():
 
 		if enemySpot.name.begins_with('front'):
 			selectables[0].append(enemySpot)
+			# this will be dynamically filled later
+			enemySpot.add_child(enemy.instantiate())
 		else:
 			selectables[1].append(enemySpot)
-		# this will be dynamically filled later
-		enemySpot.add_child(enemy.instantiate())
 
 	Signals.connect('selectingEnemies', onSelectingEnemies)
 	Signals.connect('choseEnemy', onChoseEnemy)

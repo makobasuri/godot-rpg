@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://bctbnr5eoblgy"]
+
+[ext_resource type="Script" path="res://items/Equipment.gd" id="1_57g3f"]
+[ext_resource type="Texture2D" uid="uid://dppif6gq4ftet" path="res://assets/items/weapons/sword_1.png" id="2_4e7ta"]
+
+[resource]
+script = ExtResource("1_57g3f")
+slot = 3
+armor = 0
+damageMin = 3
+damageMax = 6
+tier = 1
+enchantments = []
+name = "Longsword"
+cost = 10
+texture = ExtResource("2_4e7ta")
+rarity = 0.5

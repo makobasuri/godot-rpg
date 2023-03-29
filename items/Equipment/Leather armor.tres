@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://c1eklucbkywib"]
+
+[ext_resource type="Script" path="res://items/Equipment.gd" id="1_3yk4g"]
+[ext_resource type="Texture2D" uid="uid://dogegdjcf2xch" path="res://assets/items/armor/armor_110.png" id="2_35aqj"]
+
+[resource]
+script = ExtResource("1_3yk4g")
+slot = {
+"AMULET": 5,
+"ARMOR": 0,
+"BOOTS": 1,
+"HAND_LEFT": 2,
+"HAND_RIGHT": 3,
+"RING": 4
+}
+armor = 3
+damageMin = 0
+damageMax = 0
+tier = 1
+enchantments = []
+name = "Leather armor"
+cost = 15
+texture = ExtResource("2_35aqj")
+rarity = 0.5

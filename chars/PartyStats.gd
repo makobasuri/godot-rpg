@@ -1,5 +1,11 @@
 extends Node
 
+var xp: int = 0
+var currency: int = 0
+var items: Array[Item] = []
+var world: String = ''
+var position: Vector2 = Vector2()
+
 var partyMemberOne = {
 	charName = 'one',
 	spriteScene = 'res://chars/sprites/char_one_animated_sprite_2d.tscn',
@@ -10,6 +16,15 @@ var partyMemberOne = {
 	attackDamage = 6,
 	armor = 2,
 	speed = 3,
+	level = 1,
+	equipment = {
+		armor = '',
+		boots = '',
+		handLeft = '',
+		handRight = '',
+		ring = '',
+		amulet = ''
+	}
 }
 var partyMemberTwo = {
 	charName = 'two',
@@ -21,6 +36,7 @@ var partyMemberTwo = {
 	attackDamage = 5,
 	armor = 3,
 	speed = 2,
+	level = 1
 }
 var partyMemberThree = {
 	charName = 'three',
@@ -32,6 +48,7 @@ var partyMemberThree = {
 	attackDamage = 4,
 	armor = 1,
 	speed = 4,
+	level = 1
 }
 var partyMemberFour = {
 	charName = 'four',
@@ -43,4 +60,5 @@ var partyMemberFour = {
 	attackDamage = 2,
 	armor = 1,
 	speed = 1,
+	level = 1
 }

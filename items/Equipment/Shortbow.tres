@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://kija774c67kr"]
+
+[ext_resource type="Script" path="res://items/Equipment.gd" id="1_0ldj7"]
+[ext_resource type="Texture2D" uid="uid://brh36al001og0" path="res://assets/items/weapons/bow_17.png" id="2_tt174"]
+
+[resource]
+script = ExtResource("1_0ldj7")
+slot = 3
+armor = 0
+damageMin = 1
+damageMax = 4
+tier = 1
+enchantments = []
+name = ""
+cost = 10
+texture = ExtResource("2_tt174")
+rarity = 0.5

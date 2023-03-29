@@ -12,6 +12,7 @@ var currMP = 0
 var attackDamage = 0
 var armor = 0
 var speed = 0
+var level = 0
 var enemyTargeted
 
 var choosableActions = [
@@ -23,13 +24,42 @@ var choosableActions = [
 var currentAction = Enums.ACTION.WAITING
 
 var tween
+var damageTween
+var deathTween
 var globalPosition
+var isDead
+
+
+func onDamageRecieved(damage):
+	currHP = currHP - damage
+	if tween:
+		tween.kill()
+	if damageTween:
+		damageTween.kill()
+	if currHP <= 0:
+		isDead = true
+		Signals.emit_signal('died', self)
+		# TODO: deathanimation
+		deathTween = create_tween()
+		deathTween.tween_property(self, 'position', Vector2(5, 5), 0.1).set_trans(Tween.TRANS_ELASTIC)
+		deathTween.tween_property(self, 'position', Vector2(-5, -5), 0.1).set_trans(Tween.TRANS_ELASTIC)
+		deathTween.parallel().tween_property(self, 'modulate', Color(1.5, 0.5, 0.5, 0), 0.25)
+		await deathTween.finished
+		self.modulate = Color(1, 1, 1, 0)
+	else:
+		damageTween = create_tween()
+		damageTween.tween_property(self, 'position', Vector2(-3, 0), 0.05).set_trans(Tween.TRANS_ELASTIC)
+		damageTween.parallel().tween_property(self, 'modulate', Color(1.5, 1.5, 1.5), 0.1)
+		damageTween.tween_property(self, 'modulate', Color(0.8, 0.8, 0.8), 0.1)
+		damageTween.tween_property(self, 'position', Vector2(3, 0), 0.05).set_trans(Tween.TRANS_ELASTIC)
+		damageTween.parallel().tween_property(self, 'modulate', Color(1.5, 1.5, 1.5), 0.1)
+		damageTween.tween_property(self, 'modulate', Color(1, 1, 1), 0.1)
 
 func onAttackDamageRecieved(target, damage):
 	if target != self:
 		return
-	var damageDealt = damage - armor if damage - armor > 0 else 1
-	currHP = currHP - damageDealt
+	var trueDamageRecieved = damage - armor if damage - armor > 0 else 1
+	onDamageRecieved(trueDamageRecieved)
 	Signals.emit_signal('statsChanged', charName, 'HP', currHP, maxHP)
 
 func onBattlerActivated(battler):
@@ -52,6 +82,13 @@ func onChoseAction(action, character):
 	currentAction = action
 	cursor.hide()
 
+func onVictory():
+	# TODO: victoryanimations
+	cursor.hide()
+	tween = create_tween()
+	tween.tween_property(self, 'position', Vector2(0, -5), 0.2)
+	tween.tween_property(self, 'position', Vector2(0, 20), 0.4).set_trans(Tween.TRANS_ELASTIC)
+
 
 func init(stats):
 	charName = stats.charName
@@ -62,6 +99,7 @@ func init(stats):
 	attackDamage = stats.attackDamage
 	armor = stats.armor
 	speed = stats.speed
+	level = stats.level
 
 	var placeHolderSprite = get_node('AnimatedSprite2D')
 	remove_child(placeHolderSprite)
@@ -77,12 +115,13 @@ func init(stats):
 	Signals.connect('enemyTargeted', onEnemyTargeted)
 	Signals.connect('choseAction', onChoseAction)
 	Signals.connect('attackDamageRecieve', onAttackDamageRecieved)
+	Signals.connect('victory', onVictory)
 
 	return self
 
 func attack():
 	var startingPosition = self.global_position
-	var finalPosition = Vector2(enemyTargeted.global_position.x - 64, enemyTargeted.global_position.y)
+	var finalPosition = Vector2(enemyTargeted.global_position.x - 64, enemyTargeted.global_position.y - 1)
 	tween = self.create_tween()
 	currentAction = Enums.ACTION.WAITING
 	tween.tween_property(self, 'global_position', finalPosition, 0.25)
@@ -101,12 +140,3 @@ func _input(event):
 	if currentAction == Enums.ACTION.ATTACKING:
 		if event.is_action_released("ui_accept"):
 			attack()
-
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	pass # Replace with function body.
-#
-#
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

@@ -1,5 +1,8 @@
 extends Node
 
+signal positionChanged
+signal enterBattle
+
 signal enemiesSpawned
 signal charactersSpawned
 
@@ -20,3 +23,6 @@ signal battlerFinishedTurn
 
 signal died
 signal victory
+signal gainedLoot
+signal gainedExp
+signal gainedCurrency

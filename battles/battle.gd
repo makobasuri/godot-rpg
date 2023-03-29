@@ -43,8 +43,32 @@ func onBattlerFinishedTurn():
 func onBattlerDied(battler):
 	turnQueue = turnQueue.filter(func(item): return item != battler)
 
+func calcExpGained():
+	var totalChrCr = characterNodes.reduce(func(accum, curr): return accum + curr.level, 0)
+	var totalEnemyCr = enemyNodes.reduce(func(acc, curr): return acc + curr.CR, 0.0)
+	var partyCR = float(totalChrCr / len(characterNodes))
+	var enemyCR = float(totalEnemyCr / len(characterNodes))
+	var difference = (partyCR - enemyCR) * 10.0
+	var expEarned = enemyCR * 10.0
+	var expGained = expEarned - difference if expEarned > difference else enemyCR
+	print('exp: ', partyCR, ' ', enemyCR, ' ', expGained)
+	return ceil(expGained)
+
 func onVictory():
-	print('YOU WON')
+	var droppedLoot = []
+	var gainedExp = calcExpGained()
+	var gainedCurrency = 0
+
+	for enemyNode in enemyNodes:
+		if enemyNode.currencyMax > 0:
+			gainedCurrency += randi_range(enemyNode.currencyMin, enemyNode.currencyMax)
+		if len(enemyNode.loot) > 0:
+			for lootItem in enemyNode.loot:
+				if randf() < lootItem.rarity:
+					droppedLoot.append(lootItem)
+	Signals.emit_signal('gainedLoot', droppedLoot)
+	Signals.emit_signal('gainedExp', gainedExp)
+	Signals.emit_signal('gainedCurrency', gainedCurrency)
 
 func _ready():
 	var placeHolderChars = get_tree().get_nodes_in_group('character')

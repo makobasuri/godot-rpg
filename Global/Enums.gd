@@ -1,3 +1,14 @@
 extends Node
 
 enum ACTION { WAITING, ACTIVE, ATTACKING, CASTING, DEFENDING, USING }
+enum SLOTS { ARMOR, BOOTS, HAND_LEFT, HAND_RIGHT, RING, AMULET }
+
+# maybe like this instead:
+const STATE := {
+	IDLE = "IDLE",
+	JUMPING = "JUMPING",
+	FALLING = "FALLING",
+	ATTACKING = "ATTACKING",
+}
+
+#print(STATE.IDLE) # "IDLE"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://bkiwqlctwwkd7"]
+
+[ext_resource type="Script" path="res://items/Equipment.gd" id="1_ykn71"]
+[ext_resource type="Texture2D" uid="uid://bm1iyjvhf7sh4" path="res://assets/items/weapons/magicweapon_1.png" id="2_uvkmq"]
+
+[resource]
+script = ExtResource("1_ykn71")
+slot = 3
+armor = 0
+damageMin = 1
+damageMax = 3
+tier = 1
+enchantments = []
+name = "Staff"
+cost = 2
+texture = ExtResource("2_uvkmq")
+rarity = 0.5

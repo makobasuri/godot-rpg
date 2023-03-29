@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bealr61iey6h1"]
+[gd_scene load_steps=26 format=3 uid="uid://ddv71tlj0t0wp"]
 
 [ext_resource type="Script" path="res://battles/battle.gd" id="1_016u5"]
 [ext_resource type="Texture2D" uid="uid://gok5uonvpv6l" path="res://assets/grasslands.png" id="1_eg6kn"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dmehiuqf6dt36" path="res://theme/cursor2.png" id="12_4lper"]
 [ext_resource type="Script" path="res://battles/ActionButton.gd" id="14_eilm1"]
 [ext_resource type="Texture2D" uid="uid://bq4j8wxjtysp4" path="res://theme/cursor3-a-8.png" id="15_pdfsb"]
+[ext_resource type="PackedScene" uid="uid://c8iwn8ej2v35j" path="res://battles/GUI/victoryPanel.tscn" id="17_0wua0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rp8y"]
 bg_color = Color(0.0248564, 0.0202949, 0.0590052, 1)
@@ -45,6 +46,7 @@ corner_radius_bottom_left = 2
 [node name="Battlescene" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_016u5")
+metadata/_edit_vertical_guides_ = [120.0]
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(644, 316)
@@ -57,11 +59,15 @@ y_sort_enabled = true
 position = Vector2(200, 440)
 
 [node name="frontTopChar" type="Node2D" parent="Party"]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(40, -56)
 
 [node name="Character" parent="Party/frontTopChar" instance=ExtResource("3_ea4p1")]
 
 [node name="frontBottomChar" type="Node2D" parent="Party"]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(0, 13)
 
 [node name="charTwo" type="Node2D" parent="Party/frontBottomChar" groups=["character"]]
@@ -69,6 +75,8 @@ position = Vector2(0, 13)
 [node name="AnimatedSprite2D3" parent="Party/frontBottomChar/charTwo" instance=ExtResource("4_5htp8")]
 
 [node name="backTopChar" type="Node2D" parent="Party"]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(-40, -36)
 
 [node name="charThree" type="Node2D" parent="Party/backTopChar" groups=["character"]]
@@ -76,6 +84,8 @@ position = Vector2(-40, -36)
 [node name="AnimatedSprite2D2" parent="Party/backTopChar/charThree" instance=ExtResource("5_p22vs")]
 
 [node name="backBottomChar" type="Node2D" parent="Party"]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(-80, 29)
 
 [node name="charFour" type="Node2D" parent="Party/backBottomChar" groups=["character"]]
@@ -100,34 +110,51 @@ scale = Vector2(0.25, 0.5)
 texture = ExtResource("12_4lper")
 
 [node name="frontTopEnemy" type="Node2D" parent="Enemies" groups=["enemySpots"]]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(-68.9821, -94.1864)
 
 [node name="ghost" parent="Enemies/frontTopEnemy" instance=ExtResource("7_sf03x")]
 
 [node name="frontCenterEnemy" type="Node2D" parent="Enemies" groups=["enemySpots"]]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(-109.221, -18.8374)
 
 [node name="ghost" parent="Enemies/frontCenterEnemy" instance=ExtResource("7_sf03x")]
+loot = Array[Resource("res://items/Item.gd")]([])
 
 [node name="frontBottomEnemy" type="Node2D" parent="Enemies" groups=["enemySpots"]]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(-53.1737, 72.2093)
 
 [node name="ghost" parent="Enemies/frontBottomEnemy" instance=ExtResource("7_sf03x")]
+loot = Array[Resource("res://items/Item.gd")]([])
 
 [node name="backTopEnemy" type="Node2D" parent="Enemies" groups=["enemySpots"]]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(57.485, -91.0464)
 
 [node name="ghost" parent="Enemies/backTopEnemy" instance=ExtResource("7_sf03x")]
+loot = Array[Resource("res://items/Item.gd")]([])
 
 [node name="backCenterEnemy" type="Node2D" parent="Enemies" groups=["enemySpots"]]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(15.8082, -17.2675)
 
 [node name="ghost" parent="Enemies/backCenterEnemy" instance=ExtResource("7_sf03x")]
+loot = Array[Resource("res://items/Item.gd")]([])
 
 [node name="backBottomEnemy" type="Node2D" parent="Enemies" groups=["enemySpots"]]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(68.9821, 76.9185)
 
 [node name="ghost" parent="Enemies/backBottomEnemy" instance=ExtResource("7_sf03x")]
+loot = Array[Resource("res://items/Item.gd")]([])
 
 [node name="cursor" type="TextureRect" parent="."]
 visible = false
@@ -140,9 +167,9 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="ActionsPanel" type="Panel" parent="."]
-offset_left = 430.0
+offset_left = 1330.0
 offset_top = 485.0
-offset_right = 1264.0
+offset_right = 2164.0
 offset_bottom = 637.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_8rp8y")
 script = ExtResource("10_nnv1l")
@@ -233,6 +260,10 @@ position = Vector2(15, 27)
 texture = ExtResource("15_pdfsb")
 
 [node name="Statblock" parent="." instance=ExtResource("10_rmou2")]
+offset_left = -400.0
 offset_top = 491.0
-offset_bottom = 491.0
+offset_right = 0.0
+offset_bottom = 635.0
 theme = SubResource("Theme_2iyg4")
+
+[node name="VictoryPanel" parent="." instance=ExtResource("17_0wua0")]
