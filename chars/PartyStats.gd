@@ -6,6 +6,10 @@ var items: Array[Item] = []
 var world: String = ''
 var position: Vector2 = Vector2()
 var inventory: InventoryData = preload('res://items/InventoryData.tres')
+var partyMemberOneInventory: InventoryData = preload('res://items/PartyMemberOneEquipment.tres')
+var partyMemberTwoInventory: InventoryData = preload('res://items/PartyMemberTwoEquipment.tres')
+var partyMemberThreeInventory: InventoryData = preload('res://items/PartyMemberThreeEquipment.tres')
+var partyMemberFourInventory: InventoryData = preload('res://items/PartyMemberFourEquipment.tres')
 
 var partyMembers = [
 	{
@@ -19,14 +23,7 @@ var partyMembers = [
 		armor = 2,
 		speed = 3,
 		level = 1,
-		equipment = {
-			armor = '',
-			boots = '',
-			handLeft = '',
-			handRight = '',
-			ring = '',
-			amulet = ''
-		}
+		equipment = partyMemberOneInventory
 	},
 	{
 		charName = 'two',
@@ -38,7 +35,8 @@ var partyMembers = [
 		attackDamage = 5,
 		armor = 3,
 		speed = 2,
-		level = 1
+		level = 1,
+		equipment = partyMemberTwoInventory
 	},
 	{
 		charName = 'three',
@@ -50,7 +48,8 @@ var partyMembers = [
 		attackDamage = 4,
 		armor = 1,
 		speed = 4,
-		level = 1
+		level = 1,
+		equipment = partyMemberThreeInventory
 	},
 	{
 		charName = 'four',
@@ -62,7 +61,8 @@ var partyMembers = [
 		attackDamage = 2,
 		armor = 1,
 		speed = 1,
-		level = 1
+		level = 1,
+		equipment = partyMemberFourInventory
 	}
 ]
 

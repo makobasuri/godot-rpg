@@ -17,12 +17,12 @@ texture = ExtResource("6_c4bsb")
 rarity = 1.0
 quantity = 6
 stackable = true
-usable = null
-consumable = null
-needsTarget = null
-effectAction = null
-effectType = null
-effectValue = null
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0
 
 [resource]
 script = ExtResource("1_s8k8p")

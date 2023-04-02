@@ -70,20 +70,20 @@ func onVictory():
 	Signals.emit_signal('gainedExp', gainedExp)
 	Signals.emit_signal('gainedCurrency', gainedCurrency)
 
-func init(membersStats):
+func _ready():
 	var placeHolderChars = get_tree().get_nodes_in_group('character')
 	for placeHolderCharIdx in len(placeHolderChars):
 		var parent = partyMemberSpots[placeHolderCharIdx]
 		parent.remove_child(placeHolderChars[placeHolderCharIdx])
 
-	var characters = membersStats.map(
+	var characters = PartyStats.partyMembers.map(
 		func(memberStats):
 			var charInstance = Character.instantiate()
 			charInstance.init(memberStats)
 			return charInstance
 	)
 
-	for index in len(membersStats):
+	for index in len(PartyStats.partyMembers):
 		var parent = partyMemberSpots[index]
 		var charInstance = characters[index]
 		parent.add_child(charInstance)
@@ -92,7 +92,3 @@ func init(membersStats):
 	Signals.connect('victory', onVictory)
 	Signals.connect('died', onBattlerDied)
 	Signals.connect('battlerFinishedTurn', onBattlerFinishedTurn)
-
-func _ready():
-	# TODO: for testing wait and check if init is called, else init self with PartyStats
-	pass

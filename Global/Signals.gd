@@ -1,7 +1,7 @@
 extends Node
 
 signal positionChanged
-signal slotClicked(index: int, button: int)
+signal slotClicked(parent, index: int, button: int)
 signal inventoryInteract(inventoryData: InventoryData, index: int, button: int)
 signal inventoryUpdated(inventoryData: InventoryData)
 signal openedChest(items: InventoryData)

@@ -5,7 +5,7 @@ class_name InventoryData
 @export var slotData: Array[Item]
 var parent = null
 
-func onSlotClicked(clickedParent: GridContainer, index: int, button: int):
+func onSlotClicked(clickedParent, index: int, button: int):
 	if clickedParent != parent:
 		return
 	Signals.emit_signal('inventoryInteract', self, index, button)

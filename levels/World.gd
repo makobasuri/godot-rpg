@@ -1,7 +1,5 @@
 extends Node2D
 
-var membersStats = PartyStats.partyMembers
-
 @onready var battleGround = preload('res://battles/battle.tscn')
 @onready var transitionBG = $TransitionBG
 @onready var player = $AnimationPlayer
@@ -35,17 +33,8 @@ func onPositionChanged():
 			camera.enabled = false
 			var battleGroundInstance = battleGround.instantiate()
 			add_child(battleGroundInstance)
-			battleGroundInstance.init(membersStats)
 			player.play("fadeIn")
 			await player.animation_finished
 
-func onStatsChanged(charName, _whatChanged, currHP, _maxHP):
-	# just for debugging
-	print(charName, currHP)
-	for member in membersStats:
-		if member.charName == charName:
-			print(member.currHP)
-
 func _ready():
 	Signals.connect('positionChanged', onPositionChanged)
-	Signals.connect('statsChanged', onStatsChanged)

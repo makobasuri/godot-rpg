@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=4 format=3 uid="uid://h5jhrbniema3"]
+
+[ext_resource type="Script" path="res://items/InventoryData.gd" id="1_iwep6"]
+[ext_resource type="Resource" uid="uid://kija774c67kr" path="res://items/Equipment/Shortbow.tres" id="2_dskj4"]
+[ext_resource type="Resource" uid="uid://c1eklucbkywib" path="res://items/Equipment/Leather armor.tres" id="3_17rne"]
+
+[resource]
+script = ExtResource("1_iwep6")
+slotData = Array[Resource("res://items/Item.gd")]([ExtResource("2_dskj4"), null, ExtResource("3_17rne"), null, null, null])

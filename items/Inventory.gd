@@ -2,9 +2,11 @@ extends Panel
 
 @onready var itemGrid = $ItemGrid
 @onready var Slot = preload("res://items/InventorySlot.tscn")
+@onready var CharEquipment = preload("res://items/CharEquipment.tscn")
 @onready var grabbedItemSlot = $GrabbedItemSlot
 @onready var externalItemGridPanel = $ExternalItemGridPanel
 @onready var externalItemGrid = $ExternalItemGridPanel/ExternalItemGrid
+@onready var charEquipmentSwitcher = $CharEquipmentSwitcher
 
 var inventoryShown = false
 var tween
@@ -81,6 +83,15 @@ func onOpenedChest(chest: Chest):
 	externalItemGridPanel.show()
 
 func _ready():
+	# maybe not remove placeholder, just set data
+	var CharEquipmentPlaceHolder = $CharEquipmentSwitcher/CharEquipment
+	charEquipmentSwitcher.remove_child(CharEquipmentPlaceHolder)
+	for partyMemberIdx in len(PartyStats.partyMembers):
+		var partyMember = PartyStats.partyMembers[partyMemberIdx]
+		var charEquipmentInstance = CharEquipment.instantiate()
+		charEquipmentSwitcher.add_child(charEquipmentInstance)
+		charEquipmentSwitcher.set_tab_title(partyMemberIdx, partyMember.charName)
+		populateInventory(partyMember.equipment, charEquipmentInstance)
 	focusedPartyMember = PartyStats.partyMembers[0]
 	populateInventory(PartyStats.inventory)
 	populateInventory(null, externalItemGrid)

@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwixhe6t6oahv"]
+
+[ext_resource type="PackedScene" uid="uid://568d7kpntkr0" path="res://items/InventorySlot.tscn" id="1_yxwsn"]
+
+[node name="CharEquipment" type="Panel"]
+offset_top = 32.0
+offset_right = 224.0
+offset_bottom = 222.0
+
+[node name="HandRight2" parent="." instance=ExtResource("1_yxwsn")]
+layout_mode = 0
+offset_top = 56.0
+offset_right = 48.0
+offset_bottom = 104.0
+
+[node name="Ring2" parent="." instance=ExtResource("1_yxwsn")]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 109.0
+offset_right = 87.0
+offset_bottom = 157.0
+
+[node name="Armor2" parent="." instance=ExtResource("1_yxwsn")]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 56.0
+offset_right = 132.0
+offset_bottom = 104.0
+
+[node name="Amulet2" parent="." instance=ExtResource("1_yxwsn")]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 5.0
+offset_right = 178.0
+offset_bottom = 53.0
+
+[node name="Boots2" parent="." instance=ExtResource("1_yxwsn")]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 135.0
+offset_right = 131.0
+offset_bottom = 183.0
+
+[node name="HandLeft2" parent="." instance=ExtResource("1_yxwsn")]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 56.0
+offset_right = 216.0
+offset_bottom = 104.0
