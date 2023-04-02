@@ -5,11 +5,6 @@ extends Node2D
 #var mapToRefRectChildren = func(node): return node.get_children().filter(filterRefRectNodes)[0]
 #var mapToEnemyButtons = func(node): return node.get_children().filter(filterButtonNodes)[0]
 #var getEnemyButtons = func(enemyParent): return enemyParent.get_children().map(mapToRefRectChildren).map(mapToEnemyButtons)
-var memberOneStats = PartyStats.partyMemberOne
-var memberTwoStats = PartyStats.partyMemberTwo
-var memberThreeStats = PartyStats.partyMemberThree
-var memberFoutStats = PartyStats.partyMemberFour
-var membersStats = [memberOneStats, memberTwoStats, memberThreeStats, memberFoutStats]
 
 @onready var Character = preload('res://chars/Character.tscn')
 
@@ -22,6 +17,11 @@ var enemyNodes = null
 
 var turnQueue = []
 
+func getSpeed(node):
+	if 'stats' in node && node.stats.speed:
+		return node.stats.speed
+	return node.speed
+
 func activateBattler():
 	var activeBattler = turnQueue[0]
 	Signals.emit_signal('battlerActivated', activeBattler)
@@ -32,7 +32,7 @@ func initTurnQueue():
 	turnQueue = turnQueue + characterNodes + enemyNodes
 
 	Signals.emit_signal('charactersSpawned', characterNodes)
-	turnQueue.sort_custom(func(a, b): return a.speed > b.speed)
+	turnQueue.sort_custom(func(a, b): return getSpeed(a) > getSpeed(b))
 	activateBattler()
 
 func onBattlerFinishedTurn():
@@ -44,7 +44,7 @@ func onBattlerDied(battler):
 	turnQueue = turnQueue.filter(func(item): return item != battler)
 
 func calcExpGained():
-	var totalChrCr = characterNodes.reduce(func(accum, curr): return accum + curr.level, 0)
+	var totalChrCr = characterNodes.reduce(func(accum, curr): return accum + curr.stats.level, 0)
 	var totalEnemyCr = enemyNodes.reduce(func(acc, curr): return acc + curr.CR, 0.0)
 	var partyCR = float(totalChrCr / len(characterNodes))
 	var enemyCR = float(totalEnemyCr / len(characterNodes))
@@ -70,23 +70,29 @@ func onVictory():
 	Signals.emit_signal('gainedExp', gainedExp)
 	Signals.emit_signal('gainedCurrency', gainedCurrency)
 
-func _ready():
+func init(membersStats):
 	var placeHolderChars = get_tree().get_nodes_in_group('character')
+	for placeHolderCharIdx in len(placeHolderChars):
+		var parent = partyMemberSpots[placeHolderCharIdx]
+		parent.remove_child(placeHolderChars[placeHolderCharIdx])
 
-#	var battlers = [] + characters + enemies
 	var characters = membersStats.map(
-		func(memberStats): return Character.instantiate().init(memberStats)
+		func(memberStats):
+			var charInstance = Character.instantiate()
+			charInstance.init(memberStats)
+			return charInstance
 	)
 
 	for index in len(membersStats):
-#		var memberStats = membersStats[index]
 		var parent = partyMemberSpots[index]
-		var placeHolderChar = placeHolderChars[index]
 		var charInstance = characters[index]
-		parent.remove_child(placeHolderChar)
 		parent.add_child(charInstance)
 
 	initTurnQueue()
 	Signals.connect('victory', onVictory)
 	Signals.connect('died', onBattlerDied)
 	Signals.connect('battlerFinishedTurn', onBattlerFinishedTurn)
+
+func _ready():
+	# TODO: for testing wait and check if init is called, else init self with PartyStats
+	pass

@@ -4,16 +4,18 @@ class_name Character
 
 var cursor
 
-var charName = ''
-var maxHP = 0
-var currHP = 0
-var maxMP = 0
-var currMP = 0
-var attackDamage = 0
-var armor = 0
-var speed = 0
-var level = 0
+#var charName = ''
+#var maxHP = 0
+#var currHP = 0
+#var maxMP = 0
+#var currMP = 0
+#var attackDamage = 0
+#var armor = 0
+#var speed = 0
+#var level = 0
 var enemyTargeted
+
+var stats = null
 
 var choosableActions = [
 	Enums.ACTION.ATTACKING,
@@ -31,12 +33,12 @@ var isDead
 
 
 func onDamageRecieved(damage):
-	currHP = currHP - damage
+	stats.currHP = stats.currHP - damage
 	if tween:
 		tween.kill()
 	if damageTween:
 		damageTween.kill()
-	if currHP <= 0:
+	if stats.currHP <= 0:
 		isDead = true
 		Signals.emit_signal('died', self)
 		# TODO: deathanimation
@@ -58,9 +60,9 @@ func onDamageRecieved(damage):
 func onAttackDamageRecieved(target, damage):
 	if target != self:
 		return
-	var trueDamageRecieved = damage - armor if damage - armor > 0 else 1
+	var trueDamageRecieved = damage - stats.armor if damage - stats.armor > 0 else 1
 	onDamageRecieved(trueDamageRecieved)
-	Signals.emit_signal('statsChanged', charName, 'HP', currHP, maxHP)
+	Signals.emit_signal('statsChanged', stats.charName, 'HP', stats.currHP, stats.maxHP)
 
 func onBattlerActivated(battler):
 	if self != battler:
@@ -90,16 +92,8 @@ func onVictory():
 	tween.tween_property(self, 'position', Vector2(0, 20), 0.4).set_trans(Tween.TRANS_ELASTIC)
 
 
-func init(stats):
-	charName = stats.charName
-	maxHP = stats.maxHP
-	currHP = stats.currHP
-	maxMP = stats.maxMP
-	currMP = stats.currMP
-	attackDamage = stats.attackDamage
-	armor = stats.armor
-	speed = stats.speed
-	level = stats.level
+func init(passedStats):
+	stats = passedStats
 
 	var placeHolderSprite = get_node('AnimatedSprite2D')
 	remove_child(placeHolderSprite)
@@ -127,7 +121,7 @@ func attack():
 	tween.tween_property(self, 'global_position', finalPosition, 0.25)
 	await tween.finished
 	await get_tree().create_timer(0.5).timeout
-	Signals.emit_signal('attackDamageRecieve', enemyTargeted, attackDamage)
+	Signals.emit_signal('attackDamageRecieve', enemyTargeted, stats.attackDamage)
 	tween = self.create_tween()
 	tween.tween_property(self, 'global_position', startingPosition, 0.15)
 	await tween.finished
@@ -136,7 +130,7 @@ func attack():
 
 func healHP(value):
 	print('healed')
-	currHP += value
+	stats.currHP += value
 
 func _input(event):
 	if currentAction == Enums.ACTION.WAITING:

@@ -10,7 +10,7 @@ func onSlotClicked(clickedParent: GridContainer, index: int, button: int):
 		return
 	Signals.emit_signal('inventoryInteract', self, index, button)
 
-func useItemInSlot(index: int, target: Character = null):
+func useItemInSlot(index: int, target):
 	var slotDataToUse = slotData[index]
 	if slotDataToUse:
 		slotDataToUse.use(target)

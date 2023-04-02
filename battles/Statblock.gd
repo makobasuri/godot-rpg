@@ -9,11 +9,11 @@ var tween
 
 func onCharactersSpawned(characterNodes):
 	for chr in characterNodes:
-		var charName = chr.charName
-		var currHP = chr.currHP
-		var maxHP = chr.maxHP
-		var currMP = chr.currMP
-		var maxMP = chr.maxMP
+		var charName = chr.stats.charName
+		var currHP = chr.stats.currHP
+		var maxHP = chr.stats.maxHP
+		var currMP = chr.stats.currMP
+		var maxMP = chr.stats.maxMP
 		var statblockItem = StatblockItem.instantiate()
 		vBoxContainer.add_child(statblockItem)
 		statblockItem.init(

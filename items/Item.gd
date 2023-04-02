@@ -37,14 +37,14 @@ func splitQuantity(quant = null) -> Item:
 
 func use(target):
 	if usable:
-		if needsTarget && !target:
+		if needsTarget && target == null:
 			return
 		pass
 	if consumable:
-		if needsTarget && !target:
+		if needsTarget && target == null:
 			return
-		if needsTarget && target:
-			target.call(effectAction, effectValue)
+		if needsTarget && target != null:
+			PartyStats.actions[effectAction].call(target, effectValue)
 		Signals.emit_signal('itemUsed', self)
 		quantity -= 1
 		if quantity < 1:

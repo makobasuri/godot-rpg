@@ -12,6 +12,7 @@ var grabbedItem: Item
 var slotClickedConnected = false
 var externalInventoryOwner = null
 var externalInventoryOpened = false
+var focusedPartyMember = null
 
 func openInventory():
 	if (inventoryShown):
@@ -67,7 +68,7 @@ func onInventoryInteract(inventoryData: InventoryData, index: int, button: int):
 		[_, MOUSE_BUTTON_LEFT]:
 			grabbedItem = inventoryData.dropSlotData(grabbedItem, index)
 		[null, MOUSE_BUTTON_RIGHT]:
-			inventoryData.useItemInSlot(index)
+			inventoryData.useItemInSlot(index, focusedPartyMember)
 		[_, MOUSE_BUTTON_RIGHT]:
 			grabbedItem = inventoryData.dropSingleSlotData(grabbedItem, index)
 	updateGrabbedItem()
@@ -80,6 +81,7 @@ func onOpenedChest(chest: Chest):
 	externalItemGridPanel.show()
 
 func _ready():
+	focusedPartyMember = PartyStats.partyMembers[0]
 	populateInventory(PartyStats.inventory)
 	populateInventory(null, externalItemGrid)
 	self.modulate = Color(1, 1, 1, 0)

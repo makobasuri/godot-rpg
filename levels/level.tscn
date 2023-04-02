@@ -294,6 +294,10 @@ quantity = 1
 stackable = false
 usable = null
 consumable = null
+needsTarget = null
+effectAction = null
+effectType = null
+effectValue = null
 
 [sub_resource type="Resource" id="Resource_ddssl"]
 script = ExtResource("8_jfmgp")
@@ -318,6 +322,10 @@ quantity = 1
 stackable = false
 usable = null
 consumable = null
+needsTarget = null
+effectAction = null
+effectType = null
+effectValue = null
 
 [sub_resource type="Resource" id="Resource_svft8"]
 script = ExtResource("11_cf1w6")
@@ -329,6 +337,10 @@ quantity = 7
 stackable = true
 usable = null
 consumable = null
+needsTarget = null
+effectAction = null
+effectType = null
+effectValue = null
 
 [sub_resource type="Resource" id="Resource_1lmpl"]
 script = ExtResource("8_pdr2l")
