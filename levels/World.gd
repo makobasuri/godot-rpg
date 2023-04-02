@@ -1,11 +1,15 @@
 extends Node2D
 
 var positionChangedTimes = 0
-var battleGround = load('res://battles/battle.tscn').instantiate()
+@onready var battleGround = preload('res://battles/battle.tscn').instantiate()
 @onready var transitionBG = $TransitionBG
 @onready var player = $AnimationPlayer
 @onready var camera = $Camera2D
+@onready var canvas = $CanvasLayer
+@onready var inventory = $CanvasLayer/Inventory
 var chanceToEncounter = 0
+var inventoryShown = false
+var tween
 
 func onPositionChanged():
 	positionChangedTimes += 1
@@ -19,7 +23,6 @@ func onPositionChanged():
 			transitionBG.position.x = camera.position.x - get_viewport().size.x / 2
 			transitionBG.position.y = camera.position.y - get_viewport().size.y / 2
 			transitionBG.size = get_viewport().size
-			print(transitionBG.position, transitionBG.size)
 			player.play("fadeOut")
 			await player.animation_finished
 			transitionBG.position = get_viewport_rect().position
@@ -29,12 +32,5 @@ func onPositionChanged():
 			player.play("fadeIn")
 			await player.animation_finished
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	Signals.connect('positionChanged', onPositionChanged)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

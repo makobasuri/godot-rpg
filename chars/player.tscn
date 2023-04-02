@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://brutk837ktq2m"]
+[gd_scene load_steps=28 format=3 uid="uid://brutk837ktq2m"]
 
 [ext_resource type="Script" path="res://chars/player.gd" id="1_5x36s"]
 [ext_resource type="PackedScene" uid="uid://cogqq8l52fq7u" path="res://chars/playerClip.tscn" id="2_dtv4a"]
@@ -217,10 +217,15 @@ _data = {
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dvjhm"]
 load_path = "res://.godot/imported/Female 03-1.png-3288e113333a8f40700d5aa132a7462f.ctex"
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sfui4"]
+radius = 14.0112
+height = 36.0217
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_5x36s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 3
 position = Vector2(0.5, -3)
 shape = SubResource("RectangleShape2D_pfh7e")
 
@@ -244,4 +249,10 @@ hframes = 3
 vframes = 4
 frame = 1
 
-[node name="Node2D" parent="." instance=ExtResource("2_dtv4a")]
+[node name="PlayerClip" parent="." instance=ExtResource("2_dtv4a")]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="InteractionArea" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.58301
+shape = SubResource("CapsuleShape2D_sfui4")

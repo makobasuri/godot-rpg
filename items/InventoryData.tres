@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=9 format=3 uid="uid://c0bbst8j35m0h"]
+
+[ext_resource type="Script" path="res://items/InventoryData.gd" id="1_s8k8p"]
+[ext_resource type="Resource" uid="uid://c1eklucbkywib" path="res://items/Equipment/Leather armor.tres" id="2_m4v8i"]
+[ext_resource type="Resource" uid="uid://bctbnr5eoblgy" path="res://items/Equipment/Longsword.tres" id="3_4y64m"]
+[ext_resource type="Resource" uid="uid://bkiwqlctwwkd7" path="res://items/Equipment/Staff.tres" id="4_shg5w"]
+[ext_resource type="Script" path="res://items/Item.gd" id="5_igc5c"]
+[ext_resource type="Resource" uid="uid://bp6685cdxwidr" path="res://items/Materials/Ruby.tres" id="5_jbnwp"]
+[ext_resource type="Texture2D" uid="uid://br7gin3hdwo7t" path="res://assets/gem_13.png" id="6_c4bsb"]
+
+[sub_resource type="Resource" id="Resource_34fbp"]
+script = ExtResource("5_igc5c")
+name = "Ruby"
+cost = 100
+texture = ExtResource("6_c4bsb")
+rarity = 1.0
+quantity = 6
+stackable = true
+
+[resource]
+script = ExtResource("1_s8k8p")
+slotData = Array[ExtResource("5_igc5c")]([ExtResource("2_m4v8i"), null, ExtResource("3_4y64m"), ExtResource("4_shg5w"), null, null, SubResource("Resource_34fbp"), ExtResource("5_jbnwp"), null, null, null, null, null, null, null, null, null, null, null, null])

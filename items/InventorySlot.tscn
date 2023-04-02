@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://568d7kpntkr0"]
+
+[ext_resource type="Script" path="res://items/InventorySlot.gd" id="1_qbx8g"]
+[ext_resource type="Texture2D" uid="uid://bjrg0iaafplv5" path="res://assets/items/weapons/sword_10.png" id="2_jygh7"]
+
+[node name="Slot" type="PanelContainer"]
+offset_right = 24.0
+offset_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_qbx8g")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_jygh7")
+stretch_mode = 5
+
+[node name="LabelQuantity" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 10
+text = "99"

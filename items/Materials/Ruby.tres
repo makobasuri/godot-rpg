@@ -9,3 +9,5 @@ name = "Ruby"
 cost = 100
 texture = ExtResource("2_c288g")
 rarity = 1.0
+quantity = 5
+stackable = true

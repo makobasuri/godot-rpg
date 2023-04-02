@@ -5,6 +5,7 @@ var currency: int = 0
 var items: Array[Item] = []
 var world: String = ''
 var position: Vector2 = Vector2()
+var inventory: InventoryData = preload('res://items/InventoryData.tres')
 
 var partyMemberOne = {
 	charName = 'one',

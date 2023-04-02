@@ -211,7 +211,7 @@ states/run/position = Vector2(623, 61)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_oychr"]
 
-[node name="Node2D" type="Node2D"]
+[node name="PlayerClip" type="Node2D"]
 script = ExtResource("1_cue03")
 
 [node name="Female03-1" type="Sprite2D" parent="."]

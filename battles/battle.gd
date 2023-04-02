@@ -79,7 +79,7 @@ func _ready():
 	)
 
 	for index in len(membersStats):
-		var memberStats = membersStats[index]
+#		var memberStats = membersStats[index]
 		var parent = partyMemberSpots[index]
 		var placeHolderChar = placeHolderChars[index]
 		var charInstance = characters[index]

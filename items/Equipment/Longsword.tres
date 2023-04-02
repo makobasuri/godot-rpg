@@ -15,3 +15,5 @@ name = "Longsword"
 cost = 10
 texture = ExtResource("2_4e7ta")
 rarity = 0.5
+quantity = 1
+stackable = false

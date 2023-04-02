@@ -1,16 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://bvhbvo0xe7vih"]
+[gd_scene load_steps=28 format=3 uid="uid://y4ivt34ilfle"]
 
 [ext_resource type="Texture2D" uid="uid://dunjeskc0kjwy" path="res://assets/TX Tileset Grass.png" id="1_txcrx"]
 [ext_resource type="Script" path="res://levels/World.gd" id="1_wft4s"]
 [ext_resource type="PackedScene" uid="uid://brutk837ktq2m" path="res://chars/player.tscn" id="2_3mb3i"]
-[ext_resource type="Texture2D" uid="uid://dt4kt85copc1d" path="res://assets/items/weapons/axe_19.png" id="4_8yakq"]
-[ext_resource type="Texture2D" uid="uid://ba517isqgdyj" path="res://assets/items/armor/armor_67.png" id="5_m703a"]
-[ext_resource type="Texture2D" uid="uid://b83nsvlg4222o" path="res://assets/items/accessories/amulet_10.png" id="6_f6flf"]
-[ext_resource type="Texture2D" uid="uid://o2vscs6wdg50" path="res://assets/items/accessories/ring_10.png" id="7_yrg0o"]
-[ext_resource type="Texture2D" uid="uid://bjrg0iaafplv5" path="res://assets/items/weapons/sword_10.png" id="8_demx6"]
-[ext_resource type="Texture2D" uid="uid://6dtbi4chqcjc" path="res://assets/items/boots/shoe_1.png" id="9_5g3wj"]
-[ext_resource type="Texture2D" uid="uid://dwph4vl7kjyxl" path="res://assets/items/armor/armor_1.png" id="10_5kqlq"]
+[ext_resource type="PackedScene" uid="uid://blaev36ndw3sp" path="res://items/Inventory.tscn" id="4_y82qv"]
+[ext_resource type="Script" path="res://levels/Chest.gd" id="7_hprxm"]
+[ext_resource type="Texture2D" uid="uid://e7wawg3tpv1r" path="res://assets/TX Props.png" id="8_3sgy3"]
+[ext_resource type="Script" path="res://items/Equipment.gd" id="8_jfmgp"]
+[ext_resource type="Script" path="res://items/InventoryData.gd" id="8_pdr2l"]
+[ext_resource type="Texture2D" uid="uid://brh36al001og0" path="res://assets/items/weapons/bow_17.png" id="9_uvit8"]
+[ext_resource type="Script" path="res://items/Item.gd" id="11_cf1w6"]
 [ext_resource type="PackedScene" uid="uid://b11wa4fboin8q" path="res://objects/tree1.tscn" id="11_n24ga"]
+[ext_resource type="Texture2D" uid="uid://dogegdjcf2xch" path="res://assets/items/armor/armor_110.png" id="11_n65w6"]
+[ext_resource type="Texture2D" uid="uid://br7gin3hdwo7t" path="res://assets/gem_13.png" id="12_ny4bv"]
 [ext_resource type="PackedScene" uid="uid://dstwb8h5ftgr6" path="res://objects/tree2.tscn" id="12_qkpsw"]
 [ext_resource type="PackedScene" uid="uid://d25lxaspyyg36" path="res://objects/tree3.tscn" id="13_v1xow"]
 
@@ -276,6 +278,63 @@ texture = ExtResource("1_txcrx")
 [sub_resource type="TileSet" id="TileSet_bpn7v"]
 sources/0 = SubResource("TileSetAtlasSource_oxthh")
 
+[sub_resource type="Resource" id="Resource_j4kfd"]
+script = ExtResource("8_jfmgp")
+slot = 3
+armor = 0
+damageMin = 1
+damageMax = 4
+tier = 1
+enchantments = []
+name = ""
+cost = 10
+texture = ExtResource("9_uvit8")
+rarity = 0.5
+quantity = 1
+stackable = false
+
+[sub_resource type="Resource" id="Resource_ddssl"]
+script = ExtResource("8_jfmgp")
+slot = {
+"AMULET": 5,
+"ARMOR": 0,
+"BOOTS": 1,
+"HAND_LEFT": 2,
+"HAND_RIGHT": 3,
+"RING": 4
+}
+armor = 3
+damageMin = 0
+damageMax = 0
+tier = 1
+enchantments = []
+name = "Leather armor"
+cost = 15
+texture = ExtResource("11_n65w6")
+rarity = 0.5
+quantity = 1
+stackable = false
+
+[sub_resource type="Resource" id="Resource_svft8"]
+script = ExtResource("11_cf1w6")
+name = "Ruby"
+cost = 100
+texture = ExtResource("12_ny4bv")
+rarity = 1.0
+quantity = 7
+stackable = true
+
+[sub_resource type="Resource" id="Resource_1lmpl"]
+script = ExtResource("8_pdr2l")
+slotData = Array[ExtResource("11_cf1w6")]([SubResource("Resource_j4kfd"), SubResource("Resource_ddssl"), SubResource("Resource_svft8")])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7pfl"]
+size = Vector2(32, 24)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xysjg"]
+radius = 24.0
+height = 48.0
+
 [sub_resource type="Animation" id="Animation_dy0ov"]
 length = 0.001
 tracks/0/type = "value"
@@ -358,137 +417,6 @@ remote_path = NodePath("../../Camera2D")
 position = Vector2(152, 18)
 zoom = Vector2(2, 2)
 
-[node name="Panel" type="Panel" parent="World/Camera2D"]
-z_index = 1
-offset_right = 480.0
-offset_bottom = 270.0
-
-[node name="Label" type="Label" parent="World/Camera2D/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Inventory"
-
-[node name="TabBar" type="TabBar" parent="World/Camera2D/Panel"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 40.0
-offset_right = 240.0
-offset_bottom = 71.0
-tab_count = 4
-tab_0/title = "One"
-tab_1/title = "Two"
-tab_2/title = "Three"
-tab_3/title = "Four"
-
-[node name="CharEquipment" type="Panel" parent="World/Camera2D/Panel"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 72.0
-offset_right = 232.0
-offset_bottom = 262.0
-
-[node name="HandRight" type="TextureRect" parent="World/Camera2D/Panel/CharEquipment"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 56.0
-offset_right = 48.0
-offset_bottom = 96.0
-texture = ExtResource("4_8yakq")
-
-[node name="Armor" type="TextureRect" parent="World/Camera2D/Panel/CharEquipment"]
-layout_mode = 0
-offset_left = 88.0
-offset_top = 56.0
-offset_right = 128.0
-offset_bottom = 96.0
-texture = ExtResource("5_m703a")
-
-[node name="Amulet" type="TextureRect" parent="World/Camera2D/Panel/CharEquipment"]
-layout_mode = 0
-offset_left = 140.0
-offset_top = 31.0
-offset_right = 164.0
-offset_bottom = 49.0
-texture = ExtResource("6_f6flf")
-
-[node name="Ring" type="TextureRect" parent="World/Camera2D/Panel/CharEquipment"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = 105.0
-offset_right = 82.0
-offset_bottom = 123.0
-texture = ExtResource("7_yrg0o")
-
-[node name="HandLeft" type="TextureRect" parent="World/Camera2D/Panel/CharEquipment"]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 56.0
-offset_right = 208.0
-offset_bottom = 96.0
-texture = ExtResource("8_demx6")
-
-[node name="Boots" type="TextureRect" parent="World/Camera2D/Panel/CharEquipment"]
-layout_mode = 0
-offset_left = 88.0
-offset_top = 120.0
-offset_right = 128.0
-offset_bottom = 160.0
-texture = ExtResource("9_5g3wj")
-
-[node name="GridContainer" type="GridContainer" parent="World/Camera2D/Panel"]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 16.0
-offset_right = 464.0
-offset_bottom = 254.0
-theme_override_constants/h_separation = 21
-theme_override_constants/v_separation = 21
-columns = 4
-
-[node name="Slot" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("10_5kqlq")
-
-[node name="Slot2" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("10_5kqlq")
-
-[node name="Slot3" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("10_5kqlq")
-
-[node name="Slot4" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("10_5kqlq")
-
-[node name="Slot5" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("10_5kqlq")
-
-[node name="Slot6" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("10_5kqlq")
-
-[node name="Slot7" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("10_5kqlq")
-
-[node name="Slot8" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="Slot9" type="TextureRect" parent="World/Camera2D/Panel/GridContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
 [node name="StaticBody2D" parent="World" instance=ExtResource("11_n24ga")]
 z_as_relative = false
 position = Vector2(208, 112)
@@ -500,6 +428,32 @@ position = Vector2(-48, 72)
 [node name="StaticBody2D3" parent="World" instance=ExtResource("13_v1xow")]
 z_as_relative = false
 position = Vector2(-88, 56)
+
+[node name="Chest" type="StaticBody2D" parent="World" groups=["Interactible"]]
+position = Vector2(137, -32)
+script = ExtResource("7_hprxm")
+inventoryExternal = SubResource("Resource_1lmpl")
+
+[node name="Chest Opened" type="Sprite2D" parent="World/Chest"]
+visible = false
+position = Vector2(0, -9)
+texture = ExtResource("8_3sgy3")
+region_enabled = true
+region_rect = Rect2(96, 76, 32, 49)
+
+[node name="Chest Intact" type="Sprite2D" parent="World/Chest"]
+texture = ExtResource("8_3sgy3")
+region_enabled = true
+region_rect = Rect2(96, 30, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Chest"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_n7pfl")
+
+[node name="InteractShape" type="CollisionShape2D" parent="World/Chest"]
+light_mask = 2
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_xysjg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World"]
 root_node = NodePath("../..")
@@ -515,3 +469,11 @@ offset_right = 616.0
 offset_bottom = 544.0
 color = Color(0, 0, 0, 0)
 metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="World"]
+
+[node name="Inventory" parent="World/CanvasLayer" instance=ExtResource("4_y82qv")]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 512.0
+offset_bottom = 302.0

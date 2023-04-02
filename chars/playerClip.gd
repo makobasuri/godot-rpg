@@ -14,6 +14,5 @@ func get_input():
 		animationTree.set("parameters/run/blend_position", input_direction)
 		animationState.travel("run")
 
-@warning_ignore("unused_parameter")
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_input()

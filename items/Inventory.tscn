@@ -1,0 +1,248 @@
+[gd_scene load_steps=9 format=3 uid="uid://blaev36ndw3sp"]
+
+[ext_resource type="Script" path="res://items/Inventory.gd" id="1_2ajde"]
+[ext_resource type="Texture2D" uid="uid://dt4kt85copc1d" path="res://assets/items/weapons/axe_19.png" id="1_s6qp4"]
+[ext_resource type="Texture2D" uid="uid://ba517isqgdyj" path="res://assets/items/armor/armor_67.png" id="2_rxwd2"]
+[ext_resource type="Texture2D" uid="uid://b83nsvlg4222o" path="res://assets/items/accessories/amulet_10.png" id="3_2vfip"]
+[ext_resource type="Texture2D" uid="uid://o2vscs6wdg50" path="res://assets/items/accessories/ring_10.png" id="4_vch6g"]
+[ext_resource type="Texture2D" uid="uid://bjrg0iaafplv5" path="res://assets/items/weapons/sword_10.png" id="5_m0oui"]
+[ext_resource type="Texture2D" uid="uid://6dtbi4chqcjc" path="res://assets/items/boots/shoe_1.png" id="6_xy4db"]
+[ext_resource type="PackedScene" uid="uid://568d7kpntkr0" path="res://items/InventorySlot.tscn" id="9_p7u57"]
+
+[node name="Inventory" type="Panel"]
+z_index = 1
+offset_right = 496.0
+offset_bottom = 288.0
+script = ExtResource("1_2ajde")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Inventory"
+
+[node name="TabBar" type="TabBar" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 71.0
+tab_count = 4
+tab_0/title = "One"
+tab_1/title = "Two"
+tab_2/title = "Three"
+tab_3/title = "Four"
+
+[node name="CharEquipment" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 232.0
+offset_bottom = 262.0
+
+[node name="HandRight" type="TextureRect" parent="CharEquipment"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 56.0
+offset_right = 48.0
+offset_bottom = 96.0
+texture = ExtResource("1_s6qp4")
+
+[node name="Armor" type="TextureRect" parent="CharEquipment"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 56.0
+offset_right = 128.0
+offset_bottom = 96.0
+texture = ExtResource("2_rxwd2")
+
+[node name="Amulet" type="TextureRect" parent="CharEquipment"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 31.0
+offset_right = 164.0
+offset_bottom = 49.0
+texture = ExtResource("3_2vfip")
+
+[node name="Ring" type="TextureRect" parent="CharEquipment"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 105.0
+offset_right = 82.0
+offset_bottom = 123.0
+texture = ExtResource("4_vch6g")
+
+[node name="HandLeft" type="TextureRect" parent="CharEquipment"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 56.0
+offset_right = 208.0
+offset_bottom = 96.0
+texture = ExtResource("5_m0oui")
+
+[node name="Boots" type="TextureRect" parent="CharEquipment"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 120.0
+offset_right = 128.0
+offset_bottom = 160.0
+texture = ExtResource("6_xy4db")
+
+[node name="ItemGrid" type="GridContainer" parent="."]
+layout_mode = 2
+offset_left = 256.0
+offset_top = 15.0
+offset_right = 472.0
+offset_bottom = 264.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 4
+
+[node name="Slot" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot2" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot3" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot4" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot5" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot6" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot7" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot8" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot9" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot10" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot11" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot12" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot13" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot14" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot15" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot18" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot16" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot17" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot19" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot20" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="ExternalItemGridPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 520.0
+offset_right = 768.0
+offset_bottom = 264.0
+
+[node name="ExternalItemGrid" type="GridContainer" parent="ExternalItemGridPanel"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 224.0
+offset_bottom = 257.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 4
+
+[node name="Slot" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot2" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot3" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot4" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot5" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot6" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot7" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot8" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot9" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot10" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot11" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot12" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot13" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot14" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot15" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot18" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot16" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot17" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot19" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="Slot20" parent="ExternalItemGridPanel/ExternalItemGrid" instance=ExtResource("9_p7u57")]
+layout_mode = 2
+
+[node name="GrabbedItemSlot" parent="." instance=ExtResource("9_p7u57")]
+visible = false
+modulate = Color(1, 1, 1, 0.635294)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+
+[editable path="GrabbedItemSlot"]

@@ -22,9 +22,9 @@ func onGainedLoot(droppedLoot):
 		lootContainer.add_child(lootItemInstance)
 	print(lootContainer.get_children())
 
-func onGainedExp(exp):
-	amountXP.text = str(exp)
-	amountTotalXP.text = str(float(amountTotalXP.text) + exp)
+func onGainedExp(xp):
+	amountXP.text = str(xp)
+	amountTotalXP.text = str(float(amountTotalXP.text) + xp)
 
 func onGainedCurrency(currency):
 	print(currency)
