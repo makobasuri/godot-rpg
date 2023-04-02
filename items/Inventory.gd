@@ -11,6 +11,7 @@ var tween
 var grabbedItem: Item
 var slotClickedConnected = false
 var externalInventoryOwner = null
+var externalInventoryOpened = false
 
 func openInventory():
 	if (inventoryShown):
@@ -25,23 +26,32 @@ func onInventoryToggle():
 		tween = create_tween()
 		tween.tween_property(self, 'modulate', Color(1, 1, 1, 0), 0.4)
 		inventoryShown = false
-		return
-	openInventory()
+		if externalInventoryOpened:
+			populateInventory(null, externalItemGrid)
+			externalItemGridPanel.hide()
+			Signals.disconnect('slotClicked', externalInventoryOwner.inventoryExternal.onSlotClicked)
+			Signals.emit_signal('chestClosed', externalInventoryOwner)
+			externalInventoryOwner = null
+			externalInventoryOpened = false
+	else:
+		openInventory()
 
 func onBattleEntered():
 	if (inventoryShown):
 		modulate = Color(1, 1, 1, 0)
 		inventoryShown = false
 
-func populateInventory(inventoryData: InventoryData, grid = itemGrid):
-	for child in grid.get_children():
-		child.queue_free()
-	for slotData in inventoryData.slotData:
-		var slot = Slot.instantiate()
-		slot.setItem(slotData)
-		grid.add_child(slot)
-	inventoryData.parent = grid
-	Signals.connect('slotClicked', inventoryData.onSlotClicked)
+func populateInventory(inventoryData: InventoryData = null, grid = itemGrid):
+	var gridChildren = grid.get_children()
+	for gridIdx in len(gridChildren):
+		gridChildren[gridIdx].setItem(null)
+	if inventoryData:
+		for slotIdx in len(inventoryData.slotData):
+			gridChildren[slotIdx].setItem(inventoryData.slotData[slotIdx])
+		inventoryData.parent = grid
+		if Signals.is_connected('slotClicked', inventoryData.onSlotClicked):
+			return
+		Signals.connect('slotClicked', inventoryData.onSlotClicked)
 
 func updateGrabbedItem():
 	if grabbedItem:
@@ -57,18 +67,21 @@ func onInventoryInteract(inventoryData: InventoryData, index: int, button: int):
 		[_, MOUSE_BUTTON_LEFT]:
 			grabbedItem = inventoryData.dropSlotData(grabbedItem, index)
 		[null, MOUSE_BUTTON_RIGHT]:
-			pass
+			inventoryData.useItemInSlot(index)
 		[_, MOUSE_BUTTON_RIGHT]:
 			grabbedItem = inventoryData.dropSingleSlotData(grabbedItem, index)
 	updateGrabbedItem()
 
 func onOpenedChest(chest: Chest):
 	openInventory()
+	externalInventoryOwner = chest
 	populateInventory(chest.inventoryExternal, externalItemGrid)
+	externalInventoryOpened = true
 	externalItemGridPanel.show()
 
 func _ready():
 	populateInventory(PartyStats.inventory)
+	populateInventory(null, externalItemGrid)
 	self.modulate = Color(1, 1, 1, 0)
 	Signals.connect('inventoryUpdated', populateInventory)
 	Signals.connect('enterBattle', onBattleEntered)

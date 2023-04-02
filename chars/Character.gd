@@ -134,6 +134,10 @@ func attack():
 	Signals.emit_signal('battlerFinishedTurn')
 	Signals.emit_signal('choseEnemy')
 
+func healHP(value):
+	print('healed')
+	currHP += value
+
 func _input(event):
 	if currentAction == Enums.ACTION.WAITING:
 		return

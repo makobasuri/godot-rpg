@@ -2,6 +2,7 @@ extends Node
 
 enum ACTION { WAITING, ACTIVE, ATTACKING, CASTING, DEFENDING, USING }
 enum SLOTS { ARMOR, BOOTS, HAND_LEFT, HAND_RIGHT, RING, AMULET }
+enum EFFECT_TYPE { HEAL }
 
 # maybe like this instead:
 const STATE := {

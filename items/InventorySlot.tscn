@@ -4,17 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://bjrg0iaafplv5" path="res://assets/items/weapons/sword_10.png" id="2_jygh7"]
 
 [node name="Slot" type="PanelContainer"]
-offset_right = 24.0
-offset_bottom = 24.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+custom_minimum_size = Vector2(48, 48)
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource("1_qbx8g")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]

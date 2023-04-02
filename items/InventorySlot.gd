@@ -3,7 +3,7 @@ extends PanelContainer
 class_name InventorySlot
 @export var item: Item
 
-func setItem(slotData):
+func setItem(slotData = null):
 	var textureRect = $MarginContainer/TextureRect
 	var labelQuantity = $LabelQuantity
 	if slotData:

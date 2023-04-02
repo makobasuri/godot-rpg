@@ -15,3 +15,11 @@ func interact():
 		chestOpened.show()
 		chestIntact.hide()
 		Signals.emit_signal('openedChest', self)
+
+func onChestClosed(chest: Chest):
+	if chest == self && chestOpened.visible:
+		chestOpened.hide()
+		chestIntact.show()
+
+func _ready():
+	Signals.connect('chestClosed', onChestClosed)

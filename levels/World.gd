@@ -1,7 +1,7 @@
 extends Node2D
 
 var positionChangedTimes = 0
-@onready var battleGround = preload('res://battles/battle.tscn').instantiate()
+@onready var battleGround = preload('res://battles/battle.tscn')
 @onready var transitionBG = $TransitionBG
 @onready var player = $AnimationPlayer
 @onready var camera = $Camera2D
@@ -28,7 +28,7 @@ func onPositionChanged():
 			transitionBG.position = get_viewport_rect().position
 			transitionBG.size = get_viewport().size
 			camera.enabled = false
-			add_child(battleGround)
+			add_child(battleGround.instantiate())
 			player.play("fadeIn")
 			await player.animation_finished
 

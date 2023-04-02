@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://jrrthstae47p"]
+
+[ext_resource type="Script" path="res://items/Item.gd" id="1_jc0e8"]
+[ext_resource type="Texture2D" uid="uid://6le8vhnrcilt" path="res://assets/items/consumables/potion_5.png" id="2_4ycvi"]
+
+[resource]
+script = ExtResource("1_jc0e8")
+name = "Health Potion"
+cost = 50
+texture = ExtResource("2_4ycvi")
+rarity = 0.5
+quantity = 1
+stackable = true
+usable = false
+consumable = true
+needsTarget = true
+effectAction = "healHP"
+effectType = 0
+effectValue = 10
