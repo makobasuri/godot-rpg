@@ -15,6 +15,7 @@ var slotClickedConnected = false
 var externalInventoryOwner = null
 var externalInventoryOpened = false
 var focusedPartyMember = null
+var inBattle: bool = false
 
 func openInventory():
 	if (inventoryShown):
@@ -40,6 +41,7 @@ func onInventoryToggle():
 		openInventory()
 
 func onBattleEntered():
+	inBattle = true
 	if (inventoryShown):
 		modulate = Color(1, 1, 1, 0)
 		inventoryShown = false
@@ -83,7 +85,6 @@ func onOpenedChest(chest: Chest):
 	externalItemGridPanel.show()
 
 func _ready():
-	# maybe not remove placeholder, just set data
 	var CharEquipmentPlaceHolder = $CharEquipmentSwitcher/CharEquipment
 	charEquipmentSwitcher.remove_child(CharEquipmentPlaceHolder)
 	for partyMemberIdx in len(PartyStats.partyMembers):
@@ -102,7 +103,7 @@ func _ready():
 	Signals.connect('openedChest', onOpenedChest)
 
 func _input(event):
-	if event.is_action_pressed('inventoryToggle'):
+	if event.is_action_pressed('inventoryToggle') && !inBattle:
 		onInventoryToggle()
 
 func _physics_process(_delta):

@@ -5,20 +5,23 @@
 
 [resource]
 script = ExtResource("1_3yk4g")
-slot = {
-"AMULET": 5,
-"ARMOR": 0,
-"BOOTS": 1,
-"HAND_LEFT": 2,
-"HAND_RIGHT": 3,
-"RING": 4
-}
+slot = 2
+twoHanded = false
 armor = 3
 damageMin = 0
 damageMax = 0
+damageType = 3
 tier = 1
 enchantments = []
 name = "Leather armor"
 cost = 15
 texture = ExtResource("2_35aqj")
 rarity = 0.5
+quantity = 1
+stackable = false
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0

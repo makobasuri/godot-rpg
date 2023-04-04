@@ -6,10 +6,10 @@ var items: Array[Item] = []
 var world: String = ''
 var position: Vector2 = Vector2()
 var inventory: InventoryData = preload('res://items/InventoryData.tres')
-var partyMemberOneInventory: InventoryData = preload('res://items/PartyMemberOneEquipment.tres')
-var partyMemberTwoInventory: InventoryData = preload('res://items/PartyMemberTwoEquipment.tres')
-var partyMemberThreeInventory: InventoryData = preload('res://items/PartyMemberThreeEquipment.tres')
-var partyMemberFourInventory: InventoryData = preload('res://items/PartyMemberFourEquipment.tres')
+var partyMemberOneInventory: InventoryDataEquip = preload('res://items/PartyMemberOneEquipment.tres')
+var partyMemberTwoInventory: InventoryDataEquip = preload('res://items/PartyMemberTwoEquipment.tres')
+var partyMemberThreeInventory: InventoryDataEquip = preload('res://items/PartyMemberThreeEquipment.tres')
+var partyMemberFourInventory: InventoryDataEquip = preload('res://items/PartyMemberFourEquipment.tres')
 
 var partyMembers = [
 	{
@@ -74,3 +74,11 @@ var actions = {
 		target.currHP += amount
 		print(target.currHP)
 }
+
+func onInventoryUpdated(inventoryData, parent):
+	print('yeah, ', inventoryData is InventoryDataEquip)
+	print(partyMembers[0].equipment == inventoryData)
+	print(inventoryData.slotData)
+
+func _ready():
+	Signals.connect('inventoryUpdated', onInventoryUpdated)

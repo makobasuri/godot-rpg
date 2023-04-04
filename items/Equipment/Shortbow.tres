@@ -5,13 +5,23 @@
 
 [resource]
 script = ExtResource("1_0ldj7")
-slot = 3
+slot = 0
+twoHanded = true
 armor = 0
 damageMin = 1
 damageMax = 4
+damageType = 3
 tier = 1
 enchantments = []
 name = ""
 cost = 10
 texture = ExtResource("2_tt174")
 rarity = 0.5
+quantity = 1
+stackable = false
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0

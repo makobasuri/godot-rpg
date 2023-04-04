@@ -5,10 +5,12 @@
 
 [resource]
 script = ExtResource("1_57g3f")
-slot = 3
+slot = 0
+twoHanded = false
 armor = 0
 damageMin = 3
 damageMax = 6
+damageType = 3
 tier = 1
 enchantments = []
 name = "Longsword"
@@ -17,3 +19,9 @@ texture = ExtResource("2_4e7ta")
 rarity = 0.5
 quantity = 1
 stackable = false
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0

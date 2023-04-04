@@ -5,13 +5,23 @@
 
 [resource]
 script = ExtResource("1_ykn71")
-slot = 3
+slot = 0
+twoHanded = true
 armor = 0
 damageMin = 1
 damageMax = 3
+damageType = 3
 tier = 1
 enchantments = []
 name = "Staff"
 cost = 2
 texture = ExtResource("2_uvkmq")
 rarity = 0.5
+quantity = 1
+stackable = false
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0

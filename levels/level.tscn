@@ -281,9 +281,11 @@ sources/0 = SubResource("TileSetAtlasSource_oxthh")
 [sub_resource type="Resource" id="Resource_j4kfd"]
 script = ExtResource("8_jfmgp")
 slot = 3
+twoHanded = false
 armor = 0
 damageMin = 1
 damageMax = 4
+damageType = 3
 tier = 1
 enchantments = []
 name = ""
@@ -309,9 +311,11 @@ slot = {
 "HAND_RIGHT": 3,
 "RING": 4
 }
+twoHanded = false
 armor = 3
 damageMin = 0
 damageMax = 0
+damageType = 3
 tier = 1
 enchantments = []
 name = "Leather armor"
