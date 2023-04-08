@@ -3,18 +3,7 @@ extends Node2D
 class_name Character
 
 var cursor
-
-#var charName = ''
-#var maxHP = 0
-#var currHP = 0
-#var maxMP = 0
-#var currMP = 0
-#var attackDamage = 0
-#var armor = 0
-#var speed = 0
-#var level = 0
 var enemyTargeted
-
 var stats = null
 
 var choosableActions = [
@@ -24,13 +13,11 @@ var choosableActions = [
 	Enums.ACTION.USING
 ]
 var currentAction = Enums.ACTION.WAITING
-
 var tween
 var damageTween
 var deathTween
 var globalPosition
 var isDead
-
 
 func onDamageRecieved(damage):
 	stats.currHP = stats.currHP - damage
@@ -62,7 +49,7 @@ func onAttackDamageRecieved(target, damage):
 		return
 	var trueDamageRecieved = damage - stats.armor if damage - stats.armor > 0 else 1
 	onDamageRecieved(trueDamageRecieved)
-	Signals.emit_signal('statsChanged', stats.charName, 'HP', stats.currHP, stats.maxHP)
+	Signals.emit_signal('statsChanged', stats)
 
 func onBattlerActivated(battler):
 	if self != battler:
@@ -97,7 +84,6 @@ func init(passedStats):
 
 	var placeHolderSprite = get_node('AnimatedSprite2D')
 	remove_child(placeHolderSprite)
-
 	var spriteScene = load(stats.spriteScene).instantiate()
 	add_child(spriteScene)
 	add_to_group('character')
@@ -121,16 +107,17 @@ func attack():
 	tween.tween_property(self, 'global_position', finalPosition, 0.25)
 	await tween.finished
 	await get_tree().create_timer(0.5).timeout
-	Signals.emit_signal('attackDamageRecieve', enemyTargeted, stats.attackDamage)
+	var damage = PartyStats.rollAttackDamage(stats)
+	Signals.emit_signal('attackDamageRecieve', enemyTargeted, damage)
 	tween = self.create_tween()
 	tween.tween_property(self, 'global_position', startingPosition, 0.15)
 	await tween.finished
 	Signals.emit_signal('battlerFinishedTurn')
 	Signals.emit_signal('choseEnemy')
-
-func healHP(value):
-	print('healed')
-	stats.currHP += value
+#
+#func healHP(value):
+#	print('healed')
+#	stats.currHP += value
 
 func _input(event):
 	if currentAction == Enums.ACTION.WAITING:

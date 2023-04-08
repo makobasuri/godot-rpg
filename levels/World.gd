@@ -36,5 +36,9 @@ func onPositionChanged():
 			player.play("fadeIn")
 			await player.animation_finished
 
+func onBattleIsOver():
+	camera.enabled = true
+
 func _ready():
 	Signals.connect('positionChanged', onPositionChanged)
+	Signals.connect('battleIsOver', onBattleIsOver)

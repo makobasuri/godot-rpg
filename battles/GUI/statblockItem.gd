@@ -18,20 +18,16 @@ func init(memberName, currHP, maxHP, currMP, maxMP):
 	labelMP.text = formatText.format({'curr': currMP, 'max': maxMP})
 	return self
 
-func onStatsChanged(charName, stat, value, maxValue = 0):
-	if charName != partyMemberLabel.text:
+func onStatsChanged(stats):
+	if stats.charName != partyMemberLabel.text:
 		return
-
-	if stat == 'HP':
-		barHP.value = value
-		barHP.max_value = maxValue
-		var formatText = '{curr}/{max}'
-		labelHP.text = formatText.format({'curr': value, 'max': maxValue})
-	if stat == 'MP':
-		barMP.value = value
-		barMP.max_value = maxValue
-		var formatText = '{curr}/{max}'
-		labelMP.text = formatText.format({'curr': value, 'max': maxValue})
+	barHP.value = stats.currHP
+	barHP.max_value = stats.maxHP
+	barMP.value = stats.currMP
+	barMP.max_value = stats.maxMP
+	var formatText = '{curr}/{max}'
+	labelHP.text = formatText.format({'curr': stats.currHP, 'max': stats.maxHP})
+	labelMP.text = formatText.format({'curr': stats.currMP, 'max': stats.maxMP})
 
 func _ready():
 	Signals.connect('statsChanged', onStatsChanged)

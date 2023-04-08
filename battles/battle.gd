@@ -16,6 +16,7 @@ var characterNodes = null
 var enemyNodes = null
 
 var turnQueue = []
+var battleIsOver = false
 
 func getSpeed(node):
 	if 'stats' in node && node.stats.speed:
@@ -51,7 +52,7 @@ func calcExpGained():
 	var difference = (partyCR - enemyCR) * 10.0
 	var expEarned = enemyCR * 10.0
 	var expGained = expEarned - difference if expEarned > difference else enemyCR
-	print('exp: ', partyCR, ' ', enemyCR, ' ', expGained)
+#	print('exp: ', partyCR, ' ', enemyCR, ' ', expGained)
 	return ceil(expGained)
 
 func onVictory():
@@ -69,6 +70,7 @@ func onVictory():
 	Signals.emit_signal('gainedLoot', droppedLoot)
 	Signals.emit_signal('gainedExp', gainedExp)
 	Signals.emit_signal('gainedCurrency', gainedCurrency)
+	battleIsOver = true
 
 func _ready():
 	var placeHolderChars = get_tree().get_nodes_in_group('character')
@@ -92,3 +94,10 @@ func _ready():
 	Signals.connect('victory', onVictory)
 	Signals.connect('died', onBattlerDied)
 	Signals.connect('battlerFinishedTurn', onBattlerFinishedTurn)
+
+func _input(event):
+	if !battleIsOver:
+		return
+	if event.is_action_pressed("ui_accept") || event.is_action_pressed("ui_cancel"):
+		Signals.emit_signal('battleIsOver')
+		self.queue_free()

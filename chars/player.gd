@@ -14,8 +14,13 @@ func onBattleEntered():
 	playerClip.hide()
 	battleEntered = true
 
+func onBattleIsOver():
+	playerClip.show()
+	battleEntered = false
+
 func _ready():
 	Signals.connect('enterBattle', onBattleEntered)
+	Signals.connect('battleIsOver', onBattleIsOver)
 
 func getInteractibleInArea():
 	if len(area2d.get_overlapping_bodies()) > 1:
@@ -41,8 +46,7 @@ func get_input():
 		animationTree.set("parameters/run/blend_position", input_direction)
 		animationState.travel("run")
 
-@warning_ignore("unused_parameter")
-func _physics_process(delta):
+func _physics_process(_delta):
 	if battleEntered:
 		return
 	get_input()

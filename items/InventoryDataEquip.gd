@@ -5,7 +5,6 @@ class_name InventoryDataEquip
 func dropSlotData(grabbedItem: Item, index: int):
 	if not grabbedItem is Equipment:
 		return grabbedItem
-	print(grabbedItem.slot)
 	if grabbedItem.slot != index:
 		return grabbedItem
 	return super.dropSlotData(grabbedItem, index)

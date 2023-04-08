@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dunjeskc0kjwy" path="res://assets/TX Tileset Grass.png" id="1_txcrx"]
 [ext_resource type="Script" path="res://levels/World.gd" id="1_wft4s"]
 [ext_resource type="PackedScene" uid="uid://brutk837ktq2m" path="res://chars/player.tscn" id="2_3mb3i"]
-[ext_resource type="PackedScene" uid="uid://blaev36ndw3sp" path="res://items/Inventory.tscn" id="4_y82qv"]
+[ext_resource type="PackedScene" uid="uid://dc7d55586wjuw" path="res://items/Inventory.tscn" id="4_y82qv"]
 [ext_resource type="Script" path="res://levels/Chest.gd" id="7_hprxm"]
 [ext_resource type="Texture2D" uid="uid://e7wawg3tpv1r" path="res://assets/TX Props.png" id="8_3sgy3"]
 [ext_resource type="Script" path="res://items/Equipment.gd" id="8_jfmgp"]
@@ -497,5 +497,4 @@ metadata/_edit_lock_ = true
 [node name="Inventory" parent="World/CanvasLayer" instance=ExtResource("4_y82qv")]
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 512.0
-offset_bottom = 302.0
+offset_bottom = 512.0
