@@ -48,3 +48,5 @@ func dropSingleSlotData(grabbedItem: Item, index: int):
 	else:
 		return null
 
+func isEmpty():
+	return len(slotData.filter(func(item): return item != null)) == 0

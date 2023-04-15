@@ -6,6 +6,7 @@ signal inventoryInteract(inventoryData: InventoryData, index: int, button: int)
 signal inventoryUpdated(inventoryData: InventoryData)
 signal openedChest(items: InventoryData)
 signal chestClosed(chest: Chest)
+signal quitInteractingWithInventory(chest: Chest)
 signal enterBattle
 signal battleIsOver
 

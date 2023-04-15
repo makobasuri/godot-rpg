@@ -1,0 +1,107 @@
+[gd_scene load_steps=19 format=3 uid="uid://chvkfls5y40lv"]
+
+[ext_resource type="Script" path="res://Worlds/Dungeons/Cell.gd" id="1_76ljn"]
+[ext_resource type="Texture2D" uid="uid://cb7gdkj8a0pce" path="res://Worlds/Dungeons/textures/Concrete-Architextures.jpg" id="1_ytada"]
+[ext_resource type="Texture2D" uid="uid://bme26yhsjvo3v" path="res://Worlds/Dungeons/textures/Rusticated-Red-Brick-Stretcher-Architextures.jpg" id="2_q4a51"]
+[ext_resource type="Texture2D" uid="uid://bfrmnloq7fmu6" path="res://Worlds/Dungeons/textures/concrete-architectures/concrete-architectures_ao.jpg" id="3_7jm6v"]
+[ext_resource type="Texture2D" uid="uid://csit6c1wodvfc" path="res://Worlds/Dungeons/textures/rustic-brick-wall/rustic-brick-wall_ao.jpg" id="4_6sgcu"]
+[ext_resource type="Texture2D" uid="uid://bvrx00x0flpxi" path="res://Worlds/Dungeons/textures/concrete-architectures/concrete-architectures_height.jpg" id="4_72qbd"]
+[ext_resource type="Texture2D" uid="uid://dn704nu7cu0pj" path="res://Worlds/Dungeons/textures/concrete-architectures/concrete-architectures_normal.jpg" id="5_psw52"]
+[ext_resource type="Texture2D" uid="uid://bt0b5njirfus3" path="res://Worlds/Dungeons/textures/rustic-brick-wall/rustic-brick-wall_height.jpg" id="5_uklb5"]
+[ext_resource type="Texture2D" uid="uid://ci2ssijphlvrm" path="res://Worlds/Dungeons/textures/rustic-brick-wall/rustic-brick-wall_normal.jpg" id="6_k76im"]
+[ext_resource type="Texture2D" uid="uid://cg2hwp8p1fnhg" path="res://Worlds/Dungeons/textures/rustic-brick-wall/rustic-brick-wall_edge.jpg" id="7_1vjh1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mq5u4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0adhp"]
+albedo_texture = ExtResource("1_ytada")
+normal_enabled = true
+normal_texture = ExtResource("5_psw52")
+ao_enabled = true
+ao_light_affect = 0.44
+ao_texture = ExtResource("3_7jm6v")
+heightmap_enabled = true
+heightmap_texture = ExtResource("4_72qbd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awn06"]
+albedo_texture = ExtResource("1_ytada")
+normal_enabled = true
+ao_enabled = true
+heightmap_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3k5s"]
+albedo_texture = ExtResource("2_q4a51")
+roughness_texture = ExtResource("7_1vjh1")
+normal_enabled = true
+normal_texture = ExtResource("6_k76im")
+ao_enabled = true
+ao_texture = ExtResource("4_6sgcu")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_uklb5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vm682"]
+albedo_texture = ExtResource("2_q4a51")
+normal_enabled = true
+normal_texture = ExtResource("6_k76im")
+ao_enabled = true
+ao_texture = ExtResource("4_6sgcu")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_uklb5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdi3j"]
+albedo_texture = ExtResource("2_q4a51")
+normal_enabled = true
+normal_texture = ExtResource("6_k76im")
+ao_enabled = true
+ao_texture = ExtResource("4_6sgcu")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_uklb5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g53bp"]
+albedo_texture = ExtResource("2_q4a51")
+normal_enabled = true
+normal_texture = ExtResource("6_k76im")
+ao_enabled = true
+ao_texture = ExtResource("4_6sgcu")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_uklb5")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h6us6"]
+
+[node name="Cell" type="Node3D"]
+script = ExtResource("1_76ljn")
+
+[node name="bottom" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_mq5u4")
+surface_material_override/0 = SubResource("StandardMaterial3D_0adhp")
+
+[node name="top" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("PlaneMesh_mq5u4")
+surface_material_override/0 = SubResource("StandardMaterial3D_awn06")
+
+[node name="left" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, -4.37114e-08, -1, 1, 0)
+mesh = SubResource("PlaneMesh_mq5u4")
+surface_material_override/0 = SubResource("StandardMaterial3D_b3k5s")
+
+[node name="right" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 1, 1, 0)
+mesh = SubResource("PlaneMesh_mq5u4")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm682")
+
+[node name="back" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 0, 1, 1)
+mesh = SubResource("PlaneMesh_mq5u4")
+surface_material_override/0 = SubResource("StandardMaterial3D_rdi3j")
+
+[node name="front" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 0, 1, -1)
+mesh = SubResource("PlaneMesh_mq5u4")
+surface_material_override/0 = SubResource("StandardMaterial3D_g53bp")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+shape = SubResource("BoxShape3D_h6us6")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk6dnjxk2fs0f"]
+
+[ext_resource type="Texture2D" uid="uid://dynvgqog76rxp" path="res://Worlds/Dungeons/colored tiles 16-16-5.png" id="1_7jsoj"]
+[ext_resource type="Script" path="res://Worlds/Dungeons/MazeGenerator.gd" id="2_vail3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_662wq"]
+texture = ExtResource("1_7jsoj")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1g3p6"]
+sources/0 = SubResource("TileSetAtlasSource_662wq")
+
+[node name="MazeGenerator" type="TileMap"]
+tile_set = SubResource("TileSet_1g3p6")
+format = 2
+script = ExtResource("2_vail3")

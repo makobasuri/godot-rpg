@@ -10,6 +10,8 @@ var battleEntered = false
 @onready var animationState = animationTree.get("parameters/playback")
 @onready var area2d = $Area2D
 
+var interactingWith = null
+
 func onBattleEntered():
 	playerClip.hide()
 	battleEntered = true
@@ -34,7 +36,9 @@ func get_input():
 	velocity = input_direction * SPEED
 
 	if Input.is_action_just_pressed("ui_accept") && getInteractibleInArea():
-		getInteractibleInArea().interact()
+		var interactible = getInteractibleInArea()
+		interactible.interact()
+		interactingWith = interactible
 
 	if (input_direction == Vector2.ZERO):
 		animationState.travel("End")
@@ -42,6 +46,10 @@ func get_input():
 		var positionNow = global_position
 		if currentPosition.x != positionNow.x || currentPosition.y !=  positionNow.y:
 			currentPosition = positionNow
+			if interactingWith != null:
+				if not getInteractibleInArea() || not getInteractibleInArea() == interactingWith:
+					interactingWith.quitInteracting()
+					interactingWith = null
 			Signals.emit_signal('positionChanged')
 		animationTree.set("parameters/run/blend_position", input_direction)
 		animationState.travel("run")

@@ -8,16 +8,27 @@ class_name Chest
 @export var inventoryExternal: InventoryData
 
 var inventoryOpen = false
+var isInteracting = false
 
 func interact():
+	if isInteracting:
+		return
+	inventoryOpen = true
+	isInteracting = true
+	Signals.emit_signal('openedChest', self)
 	if chestIntact.visible:
-		inventoryOpen = true
 		chestOpened.show()
 		chestIntact.hide()
-		Signals.emit_signal('openedChest', self)
+
+func quitInteracting():
+	onChestClosed(self)
+	Signals.emit_signal('quitInteractingWithInventory', self)
 
 func onChestClosed(chest: Chest):
-	if chest == self && chestOpened.visible:
+	if chest == self && isInteracting:
+		isInteracting = false
+		if inventoryExternal.isEmpty():
+			return
 		chestOpened.hide()
 		chestIntact.show()
 

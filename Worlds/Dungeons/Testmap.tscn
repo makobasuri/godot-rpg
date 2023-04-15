@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkkrrbe4hthuj"]
+
+[ext_resource type="Texture2D" uid="uid://dynvgqog76rxp" path="res://Worlds/Dungeons/colored tiles 16-16-5.png" id="1_2nmdu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2rwpv"]
+texture = ExtResource("1_2nmdu")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lhrr0"]
+sources/0 = SubResource("TileSetAtlasSource_2rwpv")
+
+[node name="Testmap" type="TileMap"]
+tile_set = SubResource("TileSet_lhrr0")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 196608, 0, 1, 196608, 0, 2, 196608, 0, 65538, 196608, 0, 65537, 196608, 0, 65536, 196608, 0, 131074, 196608, 0, 131073, 196608, 0, 131072, 196608, 0, 65539, 196608, 0, 65540, 196608, 0, 65541, 196608, 0, 6, 196608, 0, 65542, 196608, 0, 131078, 196608, 0, 131079, 196608, 0, 131080, 196608, 0, 65544, 196608, 0, 8, 196608, 0, 7, 196608, 0, 65543, 196608, 0, 196615, 196608, 0, 262151, 196608, 0, 327687, 196608, 0, 327688, 196608, 0, 327689, 196608, 0, 327690, 196608, 0, 327691, 196608, 0, 262155, 196608, 0, 196619, 196608, 0, 131083, 196608, 0, 131084, 196608, 0, 131085, 196608, 0, 65549, 196608, 0, 13, 196608, 0, 12, 196608, 0, 11, 196608, 0, 65547, 196608, 0, 65548, 196608, 0)

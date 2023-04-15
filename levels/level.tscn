@@ -473,7 +473,7 @@ position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_n7pfl")
 
 [node name="InteractShape" type="CollisionShape2D" parent="World/Chest"]
-light_mask = 2
+light_mask = 0
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_xysjg")
 

@@ -12,7 +12,7 @@ var chanceToEncounter = 0
 var inventoryShown = false
 var tween
 
-var encounterChance = 100
+var encounterChance = 200
 
 func onPositionChanged():
 	positionChangedTimes += 1

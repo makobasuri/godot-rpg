@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5aecy13c38dc"]
+
+[ext_resource type="Script" path="res://Worlds/Dungeons/MapToDungeon.gd" id="1_wu2fv"]
+[ext_resource type="PackedScene" uid="uid://bixgu40ehrk01" path="res://Worlds/Dungeons/DungeonPlayer.tscn" id="3_18f22"]
+[ext_resource type="PackedScene" uid="uid://dk6dnjxk2fs0f" path="res://Worlds/Dungeons/MazeGenerator.tscn" id="4_4unrn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r6eab"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_gx84k"]
+sky_material = SubResource("ProceduralSkyMaterial_r6eab")
+
+[sub_resource type="Environment" id="Environment_s4hur"]
+background_mode = 1
+sky = SubResource("Sky_gx84k")
+ambient_light_color = Color(0.262745, 0.176471, 0.427451, 1)
+ssr_fade_in = 0.454715
+ssr_fade_out = 1.56917
+ssao_radius = 2.88
+ssao_intensity = 5.53
+ssao_power = 0.568394
+ssao_horizon = 0.16
+sdfgi_use_occlusion = true
+glow_normalized = true
+glow_intensity = 0.2
+glow_strength = 0.35
+glow_bloom = 0.3
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ybkao"]
+auto_exposure_scale = 0.1
+dof_blur_far_distance = 0.1
+dof_blur_far_transition = 0.0
+dof_blur_near_distance = 0.5
+dof_blur_near_transition = 0.0
+dof_blur_amount = 0.02
+
+[node name="Dungeon" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104195, 0)
+script = ExtResource("1_wu2fv")
+
+[node name="MazeGenerator" parent="." instance=ExtResource("4_4unrn")]
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s4hur")
+camera_attributes = SubResource("CameraAttributesPractical_ybkao")
+
+[node name="DungeonPlayer" parent="." instance=ExtResource("3_18f22")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Hello World"

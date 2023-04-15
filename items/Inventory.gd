@@ -25,7 +25,6 @@ func openInventory():
 	tween.tween_property(self, 'modulate', Color(1, 1, 1, 1), 0.4)
 	inventoryShown = true
 
-
 func onInventoryToggle():
 	if (inventoryShown):
 		tween = create_tween()
@@ -137,6 +136,14 @@ func onStatsChanged(member):
 			)
 			populateStatsInspector(member, statList)
 
+func onQuitInteractingWithInventory(exOwner):
+	if externalInventoryOpened && externalInventoryOwner == exOwner:
+		populateInventory(null, externalItemGrid)
+		externalItemGridPanel.hide()
+		Signals.disconnect('slotClicked', externalInventoryOwner.inventoryExternal.onSlotClicked)
+		Signals.emit_signal('chestClosed', externalInventoryOwner)
+		externalInventoryOwner = null
+		externalInventoryOpened = false
 
 func _ready():
 	var CharTabContentsPlaceHolder = $CharEquipmentSwitcher/CharTabContents
@@ -160,6 +167,7 @@ func _ready():
 	Signals.connect('inventoryInteract', onInventoryInteract)
 	Signals.connect('openedChest', onOpenedChest)
 	Signals.connect('statsChanged', onStatsChanged)
+	Signals.connect('quitInteractingWithInventory', onQuitInteractingWithInventory)
 
 func _input(event):
 	if event.is_action_pressed('inventoryToggle') && !inBattle:

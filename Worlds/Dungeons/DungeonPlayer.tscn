@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://bixgu40ehrk01"]
+
+[ext_resource type="Script" path="res://Worlds/Dungeons/DungeonPlayer.gd" id="1_68chr"]
+
+[node name="DungeonPlayer" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.479551, 0)
+script = ExtResource("1_68chr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
+light_color = Color(0.890196, 0.796078, 0.686275, 1)
+light_energy = 0.55
+light_specular = 0.056
+shadow_enabled = true
+omni_range = 7.0
+omni_attenuation = 1.51572
+
+[node name="RayForward" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
+target_position = Vector3(0, 0, -1)
+collide_with_areas = true
+
+[node name="RayRight" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
+target_position = Vector3(1, 0, 0)
+collide_with_areas = true
+
+[node name="RayBack" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
+target_position = Vector3(0, 0, 1)
+collide_with_areas = true
+
+[node name="RayLeft" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
+target_position = Vector3(-1, 0, 0)
+collide_with_areas = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.055237, 0.369537)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

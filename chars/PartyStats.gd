@@ -92,8 +92,8 @@ var calcStatFuncs = {
 func getMember(memberName):
 	return partyMembers.filter(func(member): return member.charName == memberName)[0]
 
-func getMemberOfInventory(inventory):
-	return partyMembers.filter(func(member): return member.equipment == inventory)[0]
+func getMemberOfInventory(inventoryData):
+	return partyMembers.filter(func(member): return member.equipment == inventoryData)[0]
 
 func healHP(target, amount):
 	target.currHP += amount
@@ -115,7 +115,7 @@ var actions = {
 	rollSpellDamage = rollSpellDamage,
 }
 
-func onInventoryUpdated(inventoryData, parent):
+func onInventoryUpdated(inventoryData, _parent):
 	if inventoryData is InventoryDataEquip:
 		var member = getMemberOfInventory(inventoryData)
 		applyEquipmentStats(member)
