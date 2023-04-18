@@ -48,14 +48,4 @@ camera_attributes = SubResource("CameraAttributesPractical_ybkao")
 
 [node name="DungeonPlayer" parent="." instance=ExtResource("3_18f22")]
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Panel" type="Panel" parent="UI"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="UI/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Hello World"
+[node name="DungeonUI" type="CanvasLayer" parent="."]

@@ -60,6 +60,3 @@ func generateMap():
 	startCell.updateFaces(usedTiles, GRID_SIZE)
 	await get_tree().create_timer(0.2).timeout
 	dungeonPlayer.rotateAtStart()
-
-func _ready():
-	generateMap()

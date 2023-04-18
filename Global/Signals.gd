@@ -7,6 +7,8 @@ signal inventoryUpdated(inventoryData: InventoryData)
 signal openedChest(items: InventoryData)
 signal chestClosed(chest: Chest)
 signal quitInteractingWithInventory(chest: Chest)
+signal playerEntered
+signal enteredDungeon
 signal enterBattle
 signal battleIsOver
 

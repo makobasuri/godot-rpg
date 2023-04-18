@@ -18,21 +18,25 @@ omni_attenuation = 1.51572
 [node name="RayForward" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
 target_position = Vector3(0, 0, -1)
+collision_mask = 16
 collide_with_areas = true
 
 [node name="RayRight" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
 target_position = Vector3(1, 0, 0)
+collision_mask = 16
 collide_with_areas = true
 
 [node name="RayBack" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
 target_position = Vector3(0, 0, 1)
+collision_mask = 16
 collide_with_areas = true
 
 [node name="RayLeft" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0444055, 0)
 target_position = Vector3(-1, 0, 0)
+collision_mask = 16
 collide_with_areas = true
 
 [node name="Camera3D" type="Camera3D" parent="."]

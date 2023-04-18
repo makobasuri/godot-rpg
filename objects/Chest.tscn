@@ -1,0 +1,109 @@
+[gd_scene load_steps=15 format=3 uid="uid://cww2wsvopu4wt"]
+
+[ext_resource type="Script" path="res://levels/Chest.gd" id="1_oayqw"]
+[ext_resource type="Script" path="res://items/InventoryData.gd" id="2_31cca"]
+[ext_resource type="Script" path="res://items/Equipment.gd" id="3_ok3ne"]
+[ext_resource type="Texture2D" uid="uid://brh36al001og0" path="res://assets/items/weapons/bow_17.png" id="4_hmyee"]
+[ext_resource type="Texture2D" uid="uid://dogegdjcf2xch" path="res://assets/items/armor/armor_110.png" id="5_hma5u"]
+[ext_resource type="Script" path="res://items/Item.gd" id="6_638d6"]
+[ext_resource type="Texture2D" uid="uid://br7gin3hdwo7t" path="res://assets/gem_13.png" id="7_006r1"]
+[ext_resource type="Texture2D" uid="uid://e7wawg3tpv1r" path="res://assets/TX Props.png" id="8_4liye"]
+[ext_resource type="PackedScene" uid="uid://j6k8ee1e3kee" path="res://objects/InteractShape.tscn" id="9_nxr2t"]
+
+[sub_resource type="Resource" id="Resource_j4kfd"]
+script = ExtResource("3_ok3ne")
+slot = 3
+twoHanded = false
+armor = 0
+damageMin = 1
+damageMax = 4
+damageType = 3
+tier = 1
+enchantments = []
+name = ""
+cost = 10
+texture = ExtResource("4_hmyee")
+rarity = 0.5
+quantity = 1
+stackable = false
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0
+
+[sub_resource type="Resource" id="Resource_ddssl"]
+script = ExtResource("3_ok3ne")
+slot = {
+"AMULET": 5,
+"ARMOR": 0,
+"BOOTS": 1,
+"HAND_LEFT": 2,
+"HAND_RIGHT": 3,
+"RING": 4
+}
+twoHanded = false
+armor = 3
+damageMin = 0
+damageMax = 0
+damageType = 3
+tier = 1
+enchantments = []
+name = "Leather armor"
+cost = 15
+texture = ExtResource("5_hma5u")
+rarity = 0.5
+quantity = 1
+stackable = false
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0
+
+[sub_resource type="Resource" id="Resource_svft8"]
+script = ExtResource("6_638d6")
+name = "Ruby"
+cost = 100
+texture = ExtResource("7_006r1")
+rarity = 1.0
+quantity = 7
+stackable = true
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0
+
+[sub_resource type="Resource" id="Resource_1lmpl"]
+script = ExtResource("2_31cca")
+slotData = Array[ExtResource("6_638d6")]([SubResource("Resource_j4kfd"), SubResource("Resource_ddssl"), SubResource("Resource_svft8")])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7pfl"]
+size = Vector2(32, 24)
+
+[node name="Chest" type="StaticBody2D" groups=["Interactible"]]
+position = Vector2(137, -32)
+script = ExtResource("1_oayqw")
+inventoryExternal = SubResource("Resource_1lmpl")
+
+[node name="Chest Opened" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -9)
+texture = ExtResource("8_4liye")
+region_enabled = true
+region_rect = Rect2(96, 76, 32, 49)
+
+[node name="Chest Intact" type="Sprite2D" parent="."]
+texture = ExtResource("8_4liye")
+region_enabled = true
+region_rect = Rect2(96, 30, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_n7pfl")
+
+[node name="InteractShape" parent="." instance=ExtResource("9_nxr2t")]

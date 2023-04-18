@@ -6,6 +6,8 @@ extends Node3D
 @onready var rays = [forward, right, back, left]
 @onready var timerprocessor: = $Timer
 
+var enteredDungeon = false
+
 func collisionCheck(direction):
 	if direction != null:
 		return direction.is_colliding()
@@ -46,6 +48,8 @@ func rotateAtStart():
 
 
 func _on_timer_timeout():
+	if !enteredDungeon:
+		return
 	var GO_W := Input.is_action_pressed('ui_up') || Input.is_action_pressed('forward')
 	var GO_S := Input.is_action_pressed('ui_down') || Input.is_action_pressed('backward')
 	var GO_Q := Input.is_action_pressed('strafe_left')
@@ -73,3 +77,9 @@ func _on_timer_timeout():
 		timerprocessor.stop()
 		await tweenTranslation(getDirection(ray_dir))
 		timerprocessor.start()
+
+func onEnteredDungeon():
+	enteredDungeon = true
+
+func _ready():
+	Signals.connect('enteredDungeon', onEnteredDungeon)

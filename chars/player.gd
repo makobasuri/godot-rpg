@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
+class_name Player
 
 const SPEED = 300.0
 var currentPosition = Vector2(0, 0)
 var battleEntered = false
+var dungeonEntered = false
 
 @onready var playerClip = $PlayerClip
 @onready var animationTree = $AnimationTree
@@ -20,9 +22,14 @@ func onBattleIsOver():
 	playerClip.show()
 	battleEntered = false
 
+func onEnteredDungeon():
+	playerClip.hide()
+
+
 func _ready():
 	Signals.connect('enterBattle', onBattleEntered)
 	Signals.connect('battleIsOver', onBattleIsOver)
+	Signals.connect('enteredDungeon', onEnteredDungeon)
 
 func getInteractibleInArea():
 	if len(area2d.get_overlapping_bodies()) > 1:
@@ -55,7 +62,7 @@ func get_input():
 		animationState.travel("run")
 
 func _physics_process(_delta):
-	if battleEntered:
+	if battleEntered || dungeonEntered:
 		return
 	get_input()
 	move_and_slide()

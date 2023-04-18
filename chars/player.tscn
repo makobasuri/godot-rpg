@@ -3,9 +3,6 @@
 [ext_resource type="Script" path="res://chars/player.gd" id="1_5x36s"]
 [ext_resource type="PackedScene" uid="uid://cogqq8l52fq7u" path="res://chars/playerClip.tscn" id="2_dtv4a"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfh7e"]
-size = Vector2(19, 10)
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fx814"]
 animation = &"idleDown"
 
@@ -221,13 +218,11 @@ load_path = "res://.godot/imported/Female 03-1.png-3288e113333a8f40700d5aa132a74
 radius = 14.0112
 height = 36.0217
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfh7e"]
+size = Vector2(11, 10)
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_5x36s")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visibility_layer = 3
-position = Vector2(0.5, -3)
-shape = SubResource("RectangleShape2D_pfh7e")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_1elua")
@@ -254,5 +249,11 @@ frame = 1
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="InteractionArea" type="CollisionShape2D" parent="Area2D"]
+modulate = Color(1, 1, 1, 0.776471)
 rotation = 1.58301
 shape = SubResource("CapsuleShape2D_sfui4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 3
+position = Vector2(0.5, -3)
+shape = SubResource("RectangleShape2D_pfh7e")

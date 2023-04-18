@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpihevffpv63u"]
+
+[ext_resource type="Script" path="res://levels/Door.gd" id="1_ghcin"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qiks4"]
+load_path = "res://.godot/imported/TX Props.png-b4806d2a526d7da20466e8e05a5591a6.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gushc"]
+load_path = "res://.godot/imported/TX Props.png-b4806d2a526d7da20466e8e05a5591a6.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ievjo"]
+size = Vector2(35.5, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mitwr"]
+size = Vector2(32, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tmtb"]
+size = Vector2(32, 14)
+
+[node name="Door" type="StaticBody2D" groups=["Interactible"]]
+position = Vector2(-40, -89)
+script = ExtResource("1_ghcin")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -39.0
+offset_right = 20.0
+offset_bottom = 1.0
+color = Color(0, 0, 0, 0.854902)
+
+[node name="DoorClosed" type="Sprite2D" parent="."]
+position = Vector2(0.5, -22)
+texture = SubResource("CompressedTexture2D_qiks4")
+region_enabled = true
+region_rect = Rect2(29, 103, 37, 50)
+
+[node name="DoorOpened" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.5, -22)
+texture = SubResource("CompressedTexture2D_gushc")
+region_enabled = true
+region_rect = Rect2(29, 166, 37, 54)
+
+[node name="CollisionShapeDoorOpened" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-15, 3, -12, 3, -9, -4, -9, -16, 10, -16, 10, -4, 13, 3, 15, 3, 15, -20, -15, -20)
+
+[node name="CollisionShapeDoorClosed" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, -2)
+shape = SubResource("RectangleShape2D_ievjo")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="InteractShapeOpenClose" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_mitwr")
+
+[node name="Entrance" type="Area2D" parent="." groups=["Interactible"]]
+position = Vector2(0, -11)
+collision_layer = 0
+
+[node name="InteractShapeEnter" type="CollisionShape2D" parent="Entrance"]
+light_mask = 0
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_5tmtb")
+
+[connection signal="body_entered" from="Entrance" to="." method="_on_entrance_body_entered"]
