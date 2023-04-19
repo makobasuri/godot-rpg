@@ -1,6 +1,6 @@
 extends Panel
 
-@onready var itemGrid = $ItemGrid
+@onready var itemGrid = $ScrollContainer/MarginContainer/ItemGrid
 @onready var Slot = preload("res://items/InventorySlot.tscn")
 @onready var CharTabContents = preload("res://items/CharTabContents.tscn")
 @onready var statsInspectorItem = preload('res://items/statsInspectorItem.tscn')
@@ -17,6 +17,7 @@ var externalInventoryOwner = null
 var externalInventoryOpened = false
 var focusedPartyMember = null
 var inBattle: bool = false
+var inventoryDataPlayer: InventoryDataPlayer = null
 
 func openInventory():
 	if (inventoryShown):
@@ -145,6 +146,10 @@ func onQuitInteractingWithInventory(exOwner):
 		externalInventoryOwner = null
 		externalInventoryOpened = false
 
+func onGainedLoot(loot):
+	if inventoryDataPlayer != null:
+		inventoryDataPlayer.store(loot)
+
 func _ready():
 	var CharTabContentsPlaceHolder = $CharEquipmentSwitcher/CharTabContents
 	charEquipmentSwitcher.remove_child(CharTabContentsPlaceHolder)
@@ -158,7 +163,8 @@ func _ready():
 			partyMember, charEquipmentInstance.get_node('statsInspector/ScrollContainer/VBoxContainer')
 		)
 	focusedPartyMember = PartyStats.partyMembers[0]
-	populateInventory(PartyStats.inventory)
+	inventoryDataPlayer = PartyStats.inventory
+	populateInventory(inventoryDataPlayer)
 	populateInventory(null, externalItemGrid)
 	self.modulate = Color(1, 1, 1, 0)
 	Signals.connect('inventoryUpdated', populateInventory)
@@ -168,6 +174,7 @@ func _ready():
 	Signals.connect('openedChest', onOpenedChest)
 	Signals.connect('statsChanged', onStatsChanged)
 	Signals.connect('quitInteractingWithInventory', onQuitInteractingWithInventory)
+	Signals.connect('gainedLoot', onGainedLoot)
 
 func _input(event):
 	if event.is_action_pressed('inventoryToggle') && !inBattle:

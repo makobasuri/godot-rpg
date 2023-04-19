@@ -12,7 +12,7 @@ var chanceToEncounter = 0
 var inventoryShown = false
 var tween
 
-var encounterChance = 200
+var encounterChance = 100
 
 func transitionBegin():
 	transitionBG.position.x = camera.position.x - get_viewport().size.x / 2

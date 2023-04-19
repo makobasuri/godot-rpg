@@ -27,76 +27,85 @@ clip_tabs = false
 [node name="CharTabContents" parent="CharEquipmentSwitcher" instance=ExtResource("2_4rn44")]
 layout_mode = 2
 
-[node name="ItemGrid" type="GridContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 16.0
+offset_right = 552.0
+offset_bottom = 232.0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 layout_mode = 2
-offset_left = 328.0
-offset_top = 15.0
-offset_right = 544.0
-offset_bottom = 279.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+
+[node name="ItemGrid" type="GridContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
 columns = 4
 
-[node name="Slot" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot2" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot2" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot3" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot3" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot4" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot4" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot5" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot5" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot6" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot6" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot7" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot7" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot8" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot8" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot9" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot9" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot10" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot10" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot11" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot11" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot12" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot12" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot13" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot13" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot14" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot14" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot15" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot15" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot18" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot18" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot16" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot16" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot17" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot17" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot19" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot19" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
-[node name="Slot20" parent="ItemGrid" instance=ExtResource("9_p7u57")]
+[node name="Slot20" parent="ScrollContainer/MarginContainer/ItemGrid" instance=ExtResource("9_p7u57")]
 layout_mode = 2
 
 [node name="ExternalItemGridPanel" type="Panel" parent="."]

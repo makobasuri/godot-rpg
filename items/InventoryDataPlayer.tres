@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="InventoryDataPlayer" load_steps=10 format=3 uid="uid://c0sicuvxmkgue"]
+
+[ext_resource type="Script" path="res://items/InventoryDataPlayer.gd" id="1_q38i8"]
+[ext_resource type="Script" path="res://items/Equipment.gd" id="2_lmqmb"]
+[ext_resource type="Script" path="res://items/Item.gd" id="3_qnsxu"]
+[ext_resource type="Texture2D" uid="uid://bm1iyjvhf7sh4" path="res://assets/items/weapons/magicweapon_1.png" id="4_rnn1s"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_015tf"]
+load_path = "res://.godot/imported/armor_110.png-4c6f7750707ff00a09700a046131f22d.ctex"
+
+[sub_resource type="Resource" id="Resource_mvl22"]
+script = ExtResource("2_lmqmb")
+slot = 2
+twoHanded = false
+armor = 3
+damageMin = 0
+damageMax = 0
+damageType = 3
+tier = 1
+enchantments = []
+name = "Leather armor"
+cost = 15
+texture = SubResource("CompressedTexture2D_015tf")
+rarity = 0.5
+quantity = 1
+stackable = false
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1u0ng"]
+load_path = "res://.godot/imported/gem_13.png-0e8b7233354c96283dd487f4507cd4e3.ctex"
+
+[sub_resource type="Resource" id="Resource_3dq21"]
+script = ExtResource("3_qnsxu")
+name = "Ruby"
+cost = 100
+texture = SubResource("CompressedTexture2D_1u0ng")
+rarity = 1.0
+quantity = 5
+stackable = true
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0
+
+[sub_resource type="Resource" id="Resource_llfwi"]
+script = ExtResource("2_lmqmb")
+slot = 0
+twoHanded = true
+armor = 0
+damageMin = 1
+damageMax = 3
+damageType = 3
+tier = 1
+enchantments = []
+name = "Staff"
+cost = 2
+texture = ExtResource("4_rnn1s")
+rarity = 0.5
+quantity = 1
+stackable = false
+usable = false
+consumable = false
+needsTarget = true
+effectAction = ""
+effectType = 0
+effectValue = 0
+
+[resource]
+script = ExtResource("1_q38i8")
+slotData = Array[ExtResource("3_qnsxu")]([SubResource("Resource_mvl22"), SubResource("Resource_3dq21"), SubResource("Resource_llfwi"), null])
